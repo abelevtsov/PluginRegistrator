@@ -1,1 +1,1 @@
-# PluginRegistrator
+# CrmPluginRegistrator
