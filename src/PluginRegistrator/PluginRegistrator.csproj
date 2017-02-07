@@ -41,8 +41,9 @@
     <AssemblyOriginatorKeyFile>rarekey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrmPluginAttributes">
-      <HintPath>..\packages\CrmPluginAttributes.1.0.0.2\lib\net451\CrmPluginAttributes.dll</HintPath>
+    <Reference Include="CrmPluginAttributes, Version=1.0.6247.24428, Culture=neutral, PublicKeyToken=8a906ca18b94da8b, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrmPluginAttributes.1.0.0.3\lib\net451\CrmPluginAttributes.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Crm.Sdk.Proxy">
       <HintPath>..\packages\Dynamics.Crm.Sdk.Clean.7.1.2.1\lib\Microsoft.Crm.Sdk.Proxy.dll</HintPath>
