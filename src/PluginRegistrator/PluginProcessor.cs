@@ -15,7 +15,7 @@ namespace PluginRegistrator
         public PluginProcessor(IOrganizationService orgService)
         {
             OrgService = orgService;
-            AssemblyReader.OrgService = OrgService;
+            AssemblyHelper.OrgService = OrgService;
             RegistrationHelper.OrgService = OrgService;
         }
 
@@ -23,21 +23,21 @@ namespace PluginRegistrator
 
         public void Process(string pluginsPath, string mergedPluginAssemblyPath, string unsecureConfigFilePath)
         {
-            var assembly = LoadAssemblyFromDisk(pluginsPath, unsecureConfigFilePath);
+            var assembly = AssemblyHelper.RetrievePluginsFromAssembly(pluginsPath, unsecureConfigFilePath);
             Process(assembly, mergedPluginAssemblyPath);
         }
 
         public void Process(string mergedPluginAssemblyPath, string configPath)
         {
             var config = XDocument.Load(configPath);
-            var assembly = LoadAssemblyFromDisk(mergedPluginAssemblyPath, config);
+            var assembly = AssemblyHelper.RetrievePluginsFromAssembly(mergedPluginAssemblyPath, config);
             Process(assembly, mergedPluginAssemblyPath);
         }
 
         private static void Process(CrmPluginAssembly assembly, string mergedPluginAssemblyPath)
         {
             // ToDo: use DataFlow
-            var currentAssembly = LoadAssemblyFromDB(assembly.Name);
+            var currentAssembly = AssemblyHelper.LoadAssemblyFromDB(assembly.Name);
             var createAssembly = currentAssembly == null;
             var pluginsForRegister = new List<CrmPlugin>();
             var pluginsForRemove = new List<CrmPlugin>();
@@ -69,7 +69,7 @@ namespace PluginRegistrator
                 try
                 {
                     assembly.IsolationMode = CrmAssemblyIsolationMode.None;
-                    assembly.AssemblyId = CreateAssemblyInDB(mergedPluginAssemblyPath, assembly);
+                    assembly.AssemblyId = AssemblyHelper.CreateAssemblyInDB(mergedPluginAssemblyPath, assembly);
                 }
                 catch (Exception ex)
                 {
@@ -93,7 +93,7 @@ namespace PluginRegistrator
                                      WorkflowActivityGroupName = plugin.WorkflowActivityGroupName
                                  }).ToArray();
 
-                UpdateAssemblyInDB(mergedPluginAssemblyPath, assembly, workflows);
+                AssemblyHelper.UpdateAssemblyInDB(mergedPluginAssemblyPath, assembly, workflows);
             }
 
             RegisterPlugins(pluginsForRegister);
@@ -184,20 +184,5 @@ namespace PluginRegistrator
                 }
             }
         }
-
-        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, string pathToUnsecureConfigFile) =>
-            AssemblyReader.RetrievePluginsFromAssembly(path, pathToUnsecureConfigFile);
-
-        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, XDocument config) =>
-            AssemblyReader.RetrievePluginsFromAssembly(path, config);
-
-        private static CrmPluginAssembly LoadAssemblyFromDB(string assemblyName) =>
-            AssemblyReader.LoadAssemblyFromDB(assemblyName);
-
-        private static void UpdateAssemblyInDB(string pathToAssembly, ICrmEntity assembly, params PluginType[] workflows) =>
-            AssemblyReader.UpdateAssemblyInDB(pathToAssembly, assembly, workflows);
-
-        private static Guid CreateAssemblyInDB(string pathToAssembly, ICrmEntity assembly) =>
-            AssemblyReader.CreateAssemblyInDB(pathToAssembly, assembly);
     }
 }

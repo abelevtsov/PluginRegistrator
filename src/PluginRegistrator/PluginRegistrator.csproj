@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\AssemblyReader.cs" />
+    <Compile Include="Helpers\AssemblyHelper.cs" />
     <Compile Include="CrmMessage.cs" />
     <Compile Include="DataContracts\IIdentity.cs" />
     <Compile Include="DataContracts\Json\Converters\EntityReferenceConverter.cs" />
