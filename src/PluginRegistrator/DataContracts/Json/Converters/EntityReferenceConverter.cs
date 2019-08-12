@@ -8,34 +8,21 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 {
     internal class EntityReferenceConverter : JsonConverter
     {
-        public EntityReferenceConverter(string entityLogicalName)
-        {
-            EntityLogicalName = entityLogicalName;
-        }
+        public EntityReferenceConverter(string entityLogicalName) => EntityLogicalName = entityLogicalName;
 
         private string EntityLogicalName { get; set; }
 
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType.IsAssignableFrom(typeof(EntityReference));
-        }
+        public override bool CanConvert(Type objectType) => objectType.IsAssignableFrom(typeof(EntityReference));
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var jtoken = JToken.Load(reader);
             try
             {
+                var jtoken = JToken.Load(reader);
                 var name = jtoken.Value<string>();
-                Guid id;
-                if (Guid.TryParse(name, out id))
-                {
-                    return new EntityReference(EntityLogicalName, id);
-                }
-
-                return new EntityReference(EntityLogicalName, Guid.Empty)
-                           {
-                               Name = name
-                           };
+                return Guid.TryParse(name, out var id)
+                    ? new EntityReference(EntityLogicalName, id)
+                    : new EntityReference(EntityLogicalName, Guid.Empty) { Name = name };
             }
             catch
             {
@@ -45,15 +32,17 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var reference = value as EntityReference;
-            if (reference == null)
+            switch (value)
             {
-                serializer.Serialize(writer, string.Empty);
-            }
-            else
-            {
-                var id = ((EntityReference)value).Id;
-                serializer.Serialize(writer, id == Guid.Empty ? string.Empty : id.ToString());
+                case EntityReference entityReference when entityReference.Id != Guid.Empty:
+                    serializer.Serialize(writer, entityReference.Id.ToString());
+                    break;
+                case EntityReference _:
+                    serializer.Serialize(writer, string.Empty);
+                    break;
+                default:
+                    serializer.Serialize(writer, string.Empty);
+                    break;
             }
         }
     }

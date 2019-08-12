@@ -47,8 +47,8 @@ namespace PluginRegistrator
                 nameBuilder.Append(primaryEntityName);
             }
 
-            if (!string.IsNullOrEmpty(secondaryEntityName) &&
-                !string.Equals(secondaryEntityName, "none", StringComparison.InvariantCultureIgnoreCase))
+            if (!(string.IsNullOrEmpty(secondaryEntityName) ||
+                  string.Equals(secondaryEntityName, "none", StringComparison.InvariantCultureIgnoreCase)))
             {
                 var format = hasPrimaryEntity ? "and {0}" : "{0}";
 
@@ -194,7 +194,7 @@ namespace PluginRegistrator
                 new SetStateRequest
                     {
                         EntityMoniker = new EntityReference(SdkMessageProcessingStep.EntityLogicalName, stepId),
-                        State = new OptionSetValue(enabled ? (int)SdkMessageProcessingStepState.Включено : (int)SdkMessageProcessingStepState.Отключено),
+                        State = new OptionSetValue(enabled ? (int)SdkMessageProcessingStepState.On : (int)SdkMessageProcessingStepState.Off),
                         Status = new OptionSetValue(-1)
                     };
 
@@ -217,7 +217,7 @@ namespace PluginRegistrator
 
         public static void Unregister(params ICrmEntity[] crmEntity)
         {
-            if (crmEntity == null || crmEntity.Length == 0)
+            if (crmEntity?.Length == 0)
             {
                 throw new ArgumentNullException(nameof(crmEntity));
             }
@@ -385,15 +385,14 @@ namespace PluginRegistrator
 
             foreach (var value in OrgService.RetrieveMultiple(query).Entities.Select(e => e[retrieveAttribute]))
             {
-                var guid = value as Guid?;
-                var entityRef = value as EntityReference;
-                if (guid != null)
+                switch (value)
                 {
-                    result.Add(guid.Value);
-                }
-                else if (entityRef != null)
-                {
-                    result.Add(entityRef.Id);
+                    case Guid guid:
+                        result.Add(guid);
+                        break;
+                    case EntityReference entityRef:
+                        result.Add(entityRef.Id);
+                        break;
                 }
             }
 

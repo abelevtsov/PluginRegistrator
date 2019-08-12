@@ -53,13 +53,7 @@ namespace PluginRegistrator.Entities
 
         public string MessagePropertyName { get; set; }
 
-        public string EntityLogicalName
-        {
-            get
-            {
-                return SdkMessageProcessingStepImage.EntityLogicalName;
-            }
-        }
+        public string EntityLogicalName => SdkMessageProcessingStepImage.EntityLogicalName;
 
         public TEntity ToEntity<TEntity>() where TEntity : Entity
         {
@@ -88,8 +82,7 @@ namespace PluginRegistrator.Entities
 
         public override bool Equals(object obj)
         {
-            var other = obj as CrmPluginImage;
-            if (other == null)
+            if (!(obj is CrmPluginImage other))
             {
                 return false;
             }

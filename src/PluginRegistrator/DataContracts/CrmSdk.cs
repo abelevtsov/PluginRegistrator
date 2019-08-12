@@ -23,7 +23,7 @@ namespace CrmSdk
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class PluginAssembly : ValidatableEntity, IIdentity
+    public partial class PluginAssembly : ValidatableEntity, IIdentity<Guid>
     {
         public PluginAssembly()
             : base(EntityLogicalName)
@@ -44,10 +44,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? PluginAssemblyId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("pluginassemblyid");
-            }
+            get => GetAttributeValue<Guid?>("pluginassemblyid");
             set
             {
                 SetAttributeValue("pluginassemblyid", value);
@@ -59,62 +56,32 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                PluginAssemblyId = value;
-            }
+            get => base.Id;
+            set => PluginAssemblyId = value;
         }
 
         [AttributeLogicalName("supportingsolutionid")]
         [JsonProperty(PropertyName = "supportingsolutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SupportingSolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("supportingsolutionid");
-            }
-        }
+        public Guid? SupportingSolutionId => GetAttributeValue<Guid?>("supportingsolutionid");
 
         [AttributeLogicalName("pluginassemblyidunique")]
         [JsonProperty(PropertyName = "pluginassemblyidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? PluginAssemblyIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("pluginassemblyidunique");
-            }
-        }
+        public Guid? PluginAssemblyIdUnique => GetAttributeValue<Guid?>("pluginassemblyidunique");
 
         [AttributeLogicalName("solutionid")]
         [JsonProperty(PropertyName = "solutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("solutionid");
-            }
-        }
+        public Guid? SolutionId => GetAttributeValue<Guid?>("solutionid");
 
         [AttributeLogicalName("sourcetype")]
         [JsonProperty(PropertyName = "sourcetype")]
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue SourceType
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("sourcetype");
-            }
-            set
-            {
-                SetAttributeValue("sourcetype", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("sourcetype");
+            set => SetAttributeValue("sourcetype", value);
         }
 
         [AttributeLogicalName("isolationmode")]
@@ -122,40 +89,22 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue IsolationMode
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("isolationmode");
-            }
-            set
-            {
-                SetAttributeValue("isolationmode", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("isolationmode");
+            set => SetAttributeValue("isolationmode", value);
         }
 
         [AttributeLogicalName("componentstate")]
         [JsonProperty(PropertyName = "componentstate")]
         [JsonConverter(typeof(OptionSetValueConverter))]
-        public OptionSetValue ComponentState
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("componentstate");
-            }
-        }
+        public OptionSetValue ComponentState => GetAttributeValue<OptionSetValue>("componentstate");
 
         [AttributeLogicalName("description")]
         [Range(0, 256)]
         [JsonProperty(PropertyName = "description")]
         public string Description
         {
-            get
-            {
-                return GetAttributeValue<string>("description");
-            }
-            set
-            {
-                SetAttributeValue("Description", "description", value);
-            }
+            get => GetAttributeValue<string>("description");
+            set => SetAttributeValue("Description", "description", value);
         }
 
         [AttributeLogicalName("name")]
@@ -163,14 +112,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("content")]
@@ -178,14 +121,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "content")]
         public string Content
         {
-            get
-            {
-                return GetAttributeValue<string>("content");
-            }
-            set
-            {
-                SetAttributeValue("Content", "content", value);
-            }
+            get => GetAttributeValue<string>("content");
+            set => SetAttributeValue("Content", "content", value);
         }
 
         [AttributeLogicalName("culture")]
@@ -193,14 +130,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "culture")]
         public string Culture
         {
-            get
-            {
-                return GetAttributeValue<string>("culture");
-            }
-            set
-            {
-                SetAttributeValue("Culture", "culture", value);
-            }
+            get => GetAttributeValue<string>("culture");
+            set => SetAttributeValue("Culture", "culture", value);
         }
 
         [AttributeLogicalName("publickeytoken")]
@@ -208,14 +139,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "publickeytoken")]
         public string PublicKeyToken
         {
-            get
-            {
-                return GetAttributeValue<string>("publickeytoken");
-            }
-            set
-            {
-                SetAttributeValue("PublicKeyToken", "publickeytoken", value);
-            }
+            get => GetAttributeValue<string>("publickeytoken");
+            set => SetAttributeValue("PublicKeyToken", "publickeytoken", value);
         }
 
         [AttributeLogicalName("version")]
@@ -223,14 +148,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "version")]
         public string Version
         {
-            get
-            {
-                return GetAttributeValue<string>("version");
-            }
-            set
-            {
-                SetAttributeValue("Version", "version", value);
-            }
+            get => GetAttributeValue<string>("version");
+            set => SetAttributeValue("Version", "version", value);
         }
 
         [AttributeLogicalName("path")]
@@ -238,14 +157,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "path")]
         public string Path
         {
-            get
-            {
-                return GetAttributeValue<string>("path");
-            }
-            set
-            {
-                SetAttributeValue("Path", "path", value);
-            }
+            get => GetAttributeValue<string>("path");
+            set => SetAttributeValue("Path", "path", value);
         }
 
         [AttributeLogicalName("sourcehash")]
@@ -253,207 +166,93 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "sourcehash")]
         public string SourceHash
         {
-            get
-            {
-                return GetAttributeValue<string>("sourcehash");
-            }
-            set
-            {
-                SetAttributeValue("SourceHash", "sourcehash", value);
-            }
+            get => GetAttributeValue<string>("sourcehash");
+            set => SetAttributeValue("SourceHash", "sourcehash", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("major")]
         [JsonProperty(PropertyName = "major")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? Major
-        {
-            get
-            {
-                return GetAttributeValue<int?>("major");
-            }
-        }
+        public int? Major => GetAttributeValue<int?>("major");
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("minor")]
         [JsonProperty(PropertyName = "minor")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? Minor
-        {
-            get
-            {
-                return GetAttributeValue<int?>("minor");
-            }
-        }
+        public int? Minor => GetAttributeValue<int?>("minor");
 
         [AttributeLogicalName("overwritetime")]
         [JsonProperty(PropertyName = "overwritetime")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? OverwriteTime
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("overwritetime");
-            }
-        }
+        public DateTime? OverwriteTime => GetAttributeValue<DateTime?>("overwritetime");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("ismanaged")]
         [JsonProperty(PropertyName = "ismanaged")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsManaged
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("ismanaged");
-            }
-        }
+        public bool? IsManaged => GetAttributeValue<bool?>("ismanaged");
 
         /// <summary>
         /// 1:N pluginassembly_plugintype
@@ -461,46 +260,25 @@ namespace CrmSdk
         [RelationshipSchemaNameAttribute("pluginassembly_plugintype")]
         public IEnumerable<PluginType> pluginassembly_plugintype
         {
-            get
-            {
-                return GetRelatedEntities<PluginType>("pluginassembly_plugintype", null);
-            }
-            set
-            {
-                SetRelatedEntities("pluginassembly_plugintype", null, value);
-            }
+            get => GetRelatedEntities<PluginType>("pluginassembly_plugintype", null);
+            set => SetRelatedEntities("pluginassembly_plugintype", null, value);
         }
 
-        public static PluginAssembly FromJson(string json)
-        {
-            return FromJson<PluginAssembly>(json);
-        }
+        public static PluginAssembly FromJson(string json) => FromJson<PluginAssembly>(json);
 
-        public static PluginAssembly FromXml(string xml)
-        {
-            return FromXml<PluginAssembly>(xml);
-        }
+        public static PluginAssembly FromXml(string xml) => FromXml<PluginAssembly>(xml);
 
-        public static PluginAssembly FromXml(XObject xml)
-        {
-            return FromXml<PluginAssembly>(xml);
-        }
+        public static PluginAssembly FromXml(XObject xml) => FromXml<PluginAssembly>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<PluginAssembly>();
-        }
+        public string ToJson() => ToJson<PluginAssembly>();
 
-        public string ToXml()
-        {
-            return ToXml<PluginAssembly>();
-        }
+        public string ToXml() => ToXml<PluginAssembly>();
     }
 
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class PluginType : ValidatableEntity, IIdentity
+    public partial class PluginType : ValidatableEntity, IIdentity<Guid>
     {
         public PluginType()
             : base(EntityLogicalName)
@@ -521,10 +299,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? PluginTypeId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("plugintypeid");
-            }
+            get => GetAttributeValue<Guid?>("plugintypeid");
             set
             {
                 SetAttributeValue("plugintypeid", value);
@@ -536,73 +311,37 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                PluginTypeId = value;
-            }
+            get => base.Id;
+            set => PluginTypeId = value;
         }
 
         [AttributeLogicalName("supportingsolutionid")]
         [JsonProperty(PropertyName = "supportingsolutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SupportingSolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("supportingsolutionid");
-            }
-        }
+        public Guid? SupportingSolutionId => GetAttributeValue<Guid?>("supportingsolutionid");
 
         [AttributeLogicalName("solutionid")]
         [JsonProperty(PropertyName = "solutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("solutionid");
-            }
-        }
+        public Guid? SolutionId => GetAttributeValue<Guid?>("solutionid");
 
         [AttributeLogicalName("plugintypeidunique")]
         [JsonProperty(PropertyName = "plugintypeidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? PluginTypeIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("plugintypeidunique");
-            }
-        }
+        public Guid? PluginTypeIdUnique => GetAttributeValue<Guid?>("plugintypeidunique");
 
         [AttributeLogicalName("componentstate")]
         [JsonProperty(PropertyName = "componentstate")]
         [JsonConverter(typeof(OptionSetValueConverter))]
-        public OptionSetValue ComponentState
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("componentstate");
-            }
-        }
+        public OptionSetValue ComponentState => GetAttributeValue<OptionSetValue>("componentstate");
 
         [AttributeLogicalName("description")]
         [Range(0, 256)]
         [JsonProperty(PropertyName = "description")]
         public string Description
         {
-            get
-            {
-                return GetAttributeValue<string>("description");
-            }
-            set
-            {
-                SetAttributeValue("Description", "description", value);
-            }
+            get => GetAttributeValue<string>("description");
+            set => SetAttributeValue("Description", "description", value);
         }
 
         [AttributeLogicalName("friendlyname")]
@@ -610,14 +349,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "friendlyname")]
         public string FriendlyName
         {
-            get
-            {
-                return GetAttributeValue<string>("friendlyname");
-            }
-            set
-            {
-                SetAttributeValue("FriendlyName", "friendlyname", value);
-            }
+            get => GetAttributeValue<string>("friendlyname");
+            set => SetAttributeValue("FriendlyName", "friendlyname", value);
         }
 
         [AttributeLogicalName("name")]
@@ -625,14 +358,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("typename")]
@@ -640,14 +367,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "typename")]
         public string TypeName
         {
-            get
-            {
-                return GetAttributeValue<string>("typename");
-            }
-            set
-            {
-                SetAttributeValue("TypeName", "typename", value);
-            }
+            get => GetAttributeValue<string>("typename");
+            set => SetAttributeValue("TypeName", "typename", value);
         }
 
         [AttributeLogicalName("workflowactivitygroupname")]
@@ -655,324 +376,147 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "workflowactivitygroupname")]
         public string WorkflowActivityGroupName
         {
-            get
-            {
-                return GetAttributeValue<string>("workflowactivitygroupname");
-            }
-            set
-            {
-                SetAttributeValue("WorkflowActivityGroupName", "workflowactivitygroupname", value);
-            }
+            get => GetAttributeValue<string>("workflowactivitygroupname");
+            set => SetAttributeValue("WorkflowActivityGroupName", "workflowactivitygroupname", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("pluginassemblyidname")]
         [JsonProperty(PropertyName = "pluginassemblyidname")]
-        public string PluginAssemblyIdName
-        {
-            get
-            {
-                return GetAttributeValue<string>("pluginassemblyidname");
-            }
-        }
+        public string PluginAssemblyIdName => GetAttributeValue<string>("pluginassemblyidname");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("culture")]
         [JsonProperty(PropertyName = "culture")]
-        public string Culture
-        {
-            get
-            {
-                return GetAttributeValue<string>("culture");
-            }
-        }
+        public string Culture => GetAttributeValue<string>("culture");
 
         [AttributeLogicalName("assemblyname")]
         [JsonProperty(PropertyName = "assemblyname")]
-        public string AssemblyName
-        {
-            get
-            {
-                return GetAttributeValue<string>("assemblyname");
-            }
-        }
+        public string AssemblyName => GetAttributeValue<string>("assemblyname");
 
         [AttributeLogicalName("publickeytoken")]
         [JsonProperty(PropertyName = "publickeytoken")]
-        public string PublicKeyToken
-        {
-            get
-            {
-                return GetAttributeValue<string>("publickeytoken");
-            }
-        }
+        public string PublicKeyToken => GetAttributeValue<string>("publickeytoken");
 
         [AttributeLogicalName("version")]
         [JsonProperty(PropertyName = "version")]
-        public string Version
-        {
-            get
-            {
-                return GetAttributeValue<string>("version");
-            }
-        }
+        public string Version => GetAttributeValue<string>("version");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("customworkflowactivityinfo")]
         [JsonProperty(PropertyName = "customworkflowactivityinfo")]
-        public string CustomWorkflowActivityInfo
-        {
-            get
-            {
-                return GetAttributeValue<string>("customworkflowactivityinfo");
-            }
-        }
+        public string CustomWorkflowActivityInfo => GetAttributeValue<string>("customworkflowactivityinfo");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("pluginassemblyid")]
         [JsonProperty(PropertyName = "pluginassemblyid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "pluginassembly" })]
         public EntityReference PluginAssemblyId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("pluginassemblyid");
-            }
-            set
-            {
-                SetAttributeValue("pluginassemblyid", value);
-            }
+            get => GetAttributeValue<EntityReference>("pluginassemblyid");
+            set => SetAttributeValue("pluginassemblyid", value);
         }
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("major")]
         [JsonProperty(PropertyName = "major")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? Major
-        {
-            get
-            {
-                return GetAttributeValue<int?>("major");
-            }
-        }
+        public int? Major => GetAttributeValue<int?>("major");
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("minor")]
         [JsonProperty(PropertyName = "minor")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? Minor
-        {
-            get
-            {
-                return GetAttributeValue<int?>("minor");
-            }
-        }
+        public int? Minor => GetAttributeValue<int?>("minor");
 
         [AttributeLogicalName("overwritetime")]
         [JsonProperty(PropertyName = "overwritetime")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? OverwriteTime
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("overwritetime");
-            }
-        }
+        public DateTime? OverwriteTime => GetAttributeValue<DateTime?>("overwritetime");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("ismanaged")]
         [JsonProperty(PropertyName = "ismanaged")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsManaged
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("ismanaged");
-            }
-        }
+        public bool? IsManaged => GetAttributeValue<bool?>("ismanaged");
 
         [AttributeLogicalName("isworkflowactivity")]
         [JsonProperty(PropertyName = "isworkflowactivity")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsWorkflowActivity
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("isworkflowactivity");
-            }
-        }
+        public bool? IsWorkflowActivity => GetAttributeValue<bool?>("isworkflowactivity");
 
-        public static PluginType FromJson(string json)
-        {
-            return FromJson<PluginType>(json);
-        }
+        public static PluginType FromJson(string json) => FromJson<PluginType>(json);
 
-        public static PluginType FromXml(string xml)
-        {
-            return FromXml<PluginType>(xml);
-        }
+        public static PluginType FromXml(string xml) => FromXml<PluginType>(xml);
 
-        public static PluginType FromXml(XObject xml)
-        {
-            return FromXml<PluginType>(xml);
-        }
+        public static PluginType FromXml(XObject xml) => FromXml<PluginType>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<PluginType>();
-        }
+        public string ToJson() => ToJson<PluginType>();
 
-        public string ToXml()
-        {
-            return ToXml<PluginType>();
-        }
+        public string ToXml() => ToXml<PluginType>();
     }
 
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class SdkMessage : ValidatableEntity, IIdentity
+    public partial class SdkMessage : ValidatableEntity, IIdentity<Guid>
     {
         public SdkMessage()
             : base(EntityLogicalName)
@@ -993,10 +537,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? SdkMessageId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageid");
-            }
+            get => GetAttributeValue<Guid?>("sdkmessageid");
             set
             {
                 SetAttributeValue("sdkmessageid", value);
@@ -1008,40 +549,22 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                SdkMessageId = value;
-            }
+            get => base.Id;
+            set => SdkMessageId = value;
         }
 
         [AttributeLogicalName("sdkmessageidunique")]
         [JsonProperty(PropertyName = "sdkmessageidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SdkMessageIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageidunique");
-            }
-        }
+        public Guid? SdkMessageIdUnique => GetAttributeValue<Guid?>("sdkmessageidunique");
 
         [AttributeLogicalName("name")]
         [Range(0, 256)]
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("categoryname")]
@@ -1049,140 +572,62 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "categoryname")]
         public string CategoryName
         {
-            get
-            {
-                return GetAttributeValue<string>("categoryname");
-            }
-            set
-            {
-                SetAttributeValue("CategoryName", "categoryname", value);
-            }
+            get => GetAttributeValue<string>("categoryname");
+            set => SetAttributeValue("CategoryName", "categoryname", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("throttlesettings")]
         [JsonProperty(PropertyName = "throttlesettings")]
-        public string ThrottleSettings
-        {
-            get
-            {
-                return GetAttributeValue<string>("throttlesettings");
-            }
-        }
+        public string ThrottleSettings => GetAttributeValue<string>("throttlesettings");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("availability")]
         [Range(-2147483648, 2147483647)]
@@ -1190,62 +635,32 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<int>))]
         public int? Availability
         {
-            get
-            {
-                return GetAttributeValue<int?>("availability");
-            }
-            set
-            {
-                SetAttributeValue("Availability", "availability", value);
-            }
+            get => GetAttributeValue<int?>("availability");
+            set => SetAttributeValue("Availability", "availability", value);
         }
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("isprivate")]
         [JsonProperty(PropertyName = "isprivate")]
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? IsPrivate
         {
-            get
-            {
-                return GetAttributeValue<bool?>("isprivate");
-            }
-            set
-            {
-                SetAttributeValue("isprivate", value);
-            }
+            get => GetAttributeValue<bool?>("isprivate");
+            set => SetAttributeValue("isprivate", value);
         }
 
         [AttributeLogicalName("autotransact")]
@@ -1253,14 +668,8 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? AutoTransact
         {
-            get
-            {
-                return GetAttributeValue<bool?>("autotransact");
-            }
-            set
-            {
-                SetAttributeValue("autotransact", value);
-            }
+            get => GetAttributeValue<bool?>("autotransact");
+            set => SetAttributeValue("autotransact", value);
         }
 
         [AttributeLogicalName("expand")]
@@ -1268,14 +677,8 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? Expand
         {
-            get
-            {
-                return GetAttributeValue<bool?>("expand");
-            }
-            set
-            {
-                SetAttributeValue("expand", value);
-            }
+            get => GetAttributeValue<bool?>("expand");
+            set => SetAttributeValue("expand", value);
         }
 
         [AttributeLogicalName("template")]
@@ -1283,50 +686,29 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? Template
         {
-            get
-            {
-                return GetAttributeValue<bool?>("template");
-            }
-            set
-            {
-                SetAttributeValue("template", value);
-            }
+            get => GetAttributeValue<bool?>("template");
+            set => SetAttributeValue("template", value);
         }
 
-        public static SdkMessage FromJson(string json)
-        {
-            return FromJson<SdkMessage>(json);
-        }
+        public static SdkMessage FromJson(string json) => FromJson<SdkMessage>(json);
 
-        public static SdkMessage FromXml(string xml)
-        {
-            return FromXml<SdkMessage>(xml);
-        }
+        public static SdkMessage FromXml(string xml) => FromXml<SdkMessage>(xml);
 
-        public static SdkMessage FromXml(XObject xml)
-        {
-            return FromXml<SdkMessage>(xml);
-        }
+        public static SdkMessage FromXml(XObject xml) => FromXml<SdkMessage>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<SdkMessage>();
-        }
+        public string ToJson() => ToJson<SdkMessage>();
 
-        public string ToXml()
-        {
-            return ToXml<SdkMessage>();
-        }
+        public string ToXml() => ToXml<SdkMessage>();
     }
 
     [DataContract]
     public enum SdkMessageProcessingStepState
     {
         [EnumMember]
-        Включено = 0,
+        On = 0,
 
         [EnumMember]
-        Отключено = 1
+        Off = 1
     }
 
     [DataContract]
@@ -1342,7 +724,7 @@ namespace CrmSdk
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class SdkMessageProcessingStep : ValidatableEntity, IIdentity
+    public partial class SdkMessageProcessingStep : ValidatableEntity, IIdentity<Guid>
     {
         public SdkMessageProcessingStep()
             : base(EntityLogicalName)
@@ -1363,10 +745,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? SdkMessageProcessingStepId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepid");
-            }
+            get => GetAttributeValue<Guid?>("sdkmessageprocessingstepid");
             set
             {
                 SetAttributeValue("sdkmessageprocessingstepid", value);
@@ -1378,48 +757,24 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                SdkMessageProcessingStepId = value;
-            }
+            get => base.Id;
+            set => SdkMessageProcessingStepId = value;
         }
 
         [AttributeLogicalName("supportingsolutionid")]
         [JsonProperty(PropertyName = "supportingsolutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SupportingSolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("supportingsolutionid");
-            }
-        }
+        public Guid? SupportingSolutionId => GetAttributeValue<Guid?>("supportingsolutionid");
 
         [AttributeLogicalName("solutionid")]
         [JsonProperty(PropertyName = "solutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("solutionid");
-            }
-        }
+        public Guid? SolutionId => GetAttributeValue<Guid?>("solutionid");
 
         [AttributeLogicalName("sdkmessageprocessingstepidunique")]
         [JsonProperty(PropertyName = "sdkmessageprocessingstepidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SdkMessageProcessingStepIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepidunique");
-            }
-        }
+        public Guid? SdkMessageProcessingStepIdUnique => GetAttributeValue<Guid?>("sdkmessageprocessingstepidunique");
 
         [AttributeLogicalName("statecode")]
         public SdkMessageProcessingStepState? StateCode
@@ -1446,14 +801,8 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue InvocationSource
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("invocationsource");
-            }
-            set
-            {
-                SetAttributeValue("invocationsource", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("invocationsource");
+            set => SetAttributeValue("invocationsource", value);
         }
 
         [AttributeLogicalName("stage")]
@@ -1461,14 +810,8 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue Stage
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("stage");
-            }
-            set
-            {
-                SetAttributeValue("stage", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("stage");
+            set => SetAttributeValue("stage", value);
         }
 
         [AttributeLogicalName("supporteddeployment")]
@@ -1476,14 +819,8 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue SupportedDeployment
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("supporteddeployment");
-            }
-            set
-            {
-                SetAttributeValue("supporteddeployment", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("supporteddeployment");
+            set => SetAttributeValue("supporteddeployment", value);
         }
 
         [AttributeLogicalName("mode")]
@@ -1491,40 +828,22 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue Mode
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("mode");
-            }
-            set
-            {
-                SetAttributeValue("mode", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("mode");
+            set => SetAttributeValue("mode", value);
         }
 
         [AttributeLogicalName("componentstate")]
         [JsonProperty(PropertyName = "componentstate")]
         [JsonConverter(typeof(OptionSetValueConverter))]
-        public OptionSetValue ComponentState
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("componentstate");
-            }
-        }
+        public OptionSetValue ComponentState => GetAttributeValue<OptionSetValue>("componentstate");
 
         [AttributeLogicalName("description")]
         [Range(0, 256)]
         [JsonProperty(PropertyName = "description")]
         public string Description
         {
-            get
-            {
-                return GetAttributeValue<string>("description");
-            }
-            set
-            {
-                SetAttributeValue("Description", "description", value);
-            }
+            get => GetAttributeValue<string>("description");
+            set => SetAttributeValue("Description", "description", value);
         }
 
         [AttributeLogicalName("name")]
@@ -1532,14 +851,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("configuration")]
@@ -1547,14 +860,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "configuration")]
         public string Configuration
         {
-            get
-            {
-                return GetAttributeValue<string>("configuration");
-            }
-            set
-            {
-                SetAttributeValue("Configuration", "configuration", value);
-            }
+            get => GetAttributeValue<string>("configuration");
+            set => SetAttributeValue("Configuration", "configuration", value);
         }
 
         [AttributeLogicalName("filteringattributes")]
@@ -1562,129 +869,57 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "filteringattributes")]
         public string FilteringAttributes
         {
-            get
-            {
-                return GetAttributeValue<string>("filteringattributes");
-            }
-            set
-            {
-                SetAttributeValue("FilteringAttributes", "filteringattributes", value);
-            }
+            get => GetAttributeValue<string>("filteringattributes");
+            set => SetAttributeValue("FilteringAttributes", "filteringattributes", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("eventhandlername")]
         [JsonProperty(PropertyName = "eventhandlername")]
-        public string EventHandlerName
-        {
-            get
-            {
-                return GetAttributeValue<string>("eventhandlername");
-            }
-        }
+        public string EventHandlerName => GetAttributeValue<string>("eventhandlername");
 
         [AttributeLogicalName("impersonatinguseridname")]
         [JsonProperty(PropertyName = "impersonatinguseridname")]
-        public string ImpersonatingUserIdName
-        {
-            get
-            {
-                return GetAttributeValue<string>("impersonatinguseridname");
-            }
-        }
+        public string ImpersonatingUserIdName => GetAttributeValue<string>("impersonatinguseridname");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("sdkmessageidname")]
         [JsonProperty(PropertyName = "sdkmessageidname")]
-        public string SdkMessageIdName
-        {
-            get
-            {
-                return GetAttributeValue<string>("sdkmessageidname");
-            }
-        }
+        public string SdkMessageIdName => GetAttributeValue<string>("sdkmessageidname");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("plugintypeidname")]
         [JsonProperty(PropertyName = "plugintypeidname")]
-        public string PluginTypeIdName
-        {
-            get
-            {
-                return GetAttributeValue<string>("plugintypeidname");
-            }
-        }
+        public string PluginTypeIdName => GetAttributeValue<string>("plugintypeidname");
 
         [AttributeLogicalName("eventhandler")]
         [JsonProperty(PropertyName = "eventhandler")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "plugintype" })]
         public EntityReference EventHandler
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("eventhandler");
-            }
-            set
-            {
-                SetAttributeValue("eventhandler", value);
-            }
+            get => GetAttributeValue<EntityReference>("eventhandler");
+            set => SetAttributeValue("eventhandler", value);
         }
 
         [AttributeLogicalName("impersonatinguserid")]
@@ -1692,14 +927,8 @@ namespace CrmSdk
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
         public EntityReference ImpersonatingUserId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("impersonatinguserid");
-            }
-            set
-            {
-                SetAttributeValue("impersonatinguserid", value);
-            }
+            get => GetAttributeValue<EntityReference>("impersonatinguserid");
+            set => SetAttributeValue("impersonatinguserid", value);
         }
 
         [AttributeLogicalName("sdkmessageid")]
@@ -1707,14 +936,8 @@ namespace CrmSdk
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessage" })]
         public EntityReference SdkMessageId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("sdkmessageid");
-            }
-            set
-            {
-                SetAttributeValue("sdkmessageid", value);
-            }
+            get => GetAttributeValue<EntityReference>("sdkmessageid");
+            set => SetAttributeValue("sdkmessageid", value);
         }
 
         [AttributeLogicalName("sdkmessageprocessingstepsecureconfigid")]
@@ -1722,14 +945,8 @@ namespace CrmSdk
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessageprocessingstepsecureconfig" })]
         public EntityReference SdkMessageProcessingStepSecureConfigId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("sdkmessageprocessingstepsecureconfigid");
-            }
-            set
-            {
-                SetAttributeValue("sdkmessageprocessingstepsecureconfigid", value);
-            }
+            get => GetAttributeValue<EntityReference>("sdkmessageprocessingstepsecureconfigid");
+            set => SetAttributeValue("sdkmessageprocessingstepsecureconfigid", value);
         }
 
         [AttributeLogicalName("plugintypeid")]
@@ -1737,14 +954,8 @@ namespace CrmSdk
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessagefilter" })]
         public EntityReference PluginTypeId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("plugintypeid");
-            }
-            set
-            {
-                SetAttributeValue("plugintypeid", value);
-            }
+            get => GetAttributeValue<EntityReference>("plugintypeid");
+            set => SetAttributeValue("plugintypeid", value);
         }
 
         [AttributeLogicalName("sdkmessagefilterid")]
@@ -1752,70 +963,34 @@ namespace CrmSdk
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessagefilter" })]
         public EntityReference SdkMessageFilterId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("sdkmessagefilterid");
-            }
-            set
-            {
-                SetAttributeValue("sdkmessagefilterid", value);
-            }
+            get => GetAttributeValue<EntityReference>("sdkmessagefilterid");
+            set => SetAttributeValue("sdkmessagefilterid", value);
         }
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("rank")]
         [Range(-2147483648, 2147483647)]
@@ -1823,116 +998,59 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<int>))]
         public int? Rank
         {
-            get
-            {
-                return GetAttributeValue<int?>("rank");
-            }
-            set
-            {
-                SetAttributeValue("Rank", "rank", value);
-            }
+            get => GetAttributeValue<int?>("rank");
+            set => SetAttributeValue("Rank", "rank", value);
         }
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("overwritetime")]
         [JsonProperty(PropertyName = "overwritetime")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? OverwriteTime
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("overwritetime");
-            }
-        }
+        public DateTime? OverwriteTime => GetAttributeValue<DateTime?>("overwritetime");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("asyncautodelete")]
         [JsonProperty(PropertyName = "asyncautodelete")]
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? AsyncAutoDelete
         {
-            get
-            {
-                return GetAttributeValue<bool?>("asyncautodelete");
-            }
-            set
-            {
-                SetAttributeValue("asyncautodelete", value);
-            }
+            get => GetAttributeValue<bool?>("asyncautodelete");
+            set => SetAttributeValue("asyncautodelete", value);
         }
 
         [AttributeLogicalName("ismanaged")]
         [JsonProperty(PropertyName = "ismanaged")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsManaged
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("ismanaged");
-            }
-        }
+        public bool? IsManaged => GetAttributeValue<bool?>("ismanaged");
 
-        public static SdkMessageProcessingStep FromJson(string json)
-        {
-            return FromJson<SdkMessageProcessingStep>(json);
-        }
+        public static SdkMessageProcessingStep FromJson(string json) => FromJson<SdkMessageProcessingStep>(json);
 
-        public static SdkMessageProcessingStep FromXml(string xml)
-        {
-            return FromXml<SdkMessageProcessingStep>(xml);
-        }
+        public static SdkMessageProcessingStep FromXml(string xml) => FromXml<SdkMessageProcessingStep>(xml);
 
-        public static SdkMessageProcessingStep FromXml(XObject xml)
-        {
-            return FromXml<SdkMessageProcessingStep>(xml);
-        }
+        public static SdkMessageProcessingStep FromXml(XObject xml) => FromXml<SdkMessageProcessingStep>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<SdkMessageProcessingStep>();
-        }
+        public string ToJson() => ToJson<SdkMessageProcessingStep>();
 
-        public string ToXml()
-        {
-            return ToXml<SdkMessageProcessingStep>();
-        }
+        public string ToXml() => ToXml<SdkMessageProcessingStep>();
     }
 
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class SdkMessageProcessingStepImage : ValidatableEntity, IIdentity
+    public partial class SdkMessageProcessingStepImage : ValidatableEntity, IIdentity<Guid>
     {
         public SdkMessageProcessingStepImage()
             : base(EntityLogicalName)
@@ -1953,10 +1071,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? SdkMessageProcessingStepImageId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepimageid");
-            }
+            get => GetAttributeValue<Guid?>("sdkmessageprocessingstepimageid");
             set
             {
                 SetAttributeValue("sdkmessageprocessingstepimageid", value);
@@ -1968,88 +1083,46 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                SdkMessageProcessingStepImageId = value;
-            }
+            get => base.Id;
+            set => SdkMessageProcessingStepImageId = value;
         }
 
         [AttributeLogicalName("supportingsolutionid")]
         [JsonProperty(PropertyName = "supportingsolutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SupportingSolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("supportingsolutionid");
-            }
-        }
+        public Guid? SupportingSolutionId => GetAttributeValue<Guid?>("supportingsolutionid");
 
         [AttributeLogicalName("solutionid")]
         [JsonProperty(PropertyName = "solutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("solutionid");
-            }
-        }
+        public Guid? SolutionId => GetAttributeValue<Guid?>("solutionid");
 
         [AttributeLogicalName("sdkmessageprocessingstepimageidunique")]
         [JsonProperty(PropertyName = "sdkmessageprocessingstepimageidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SdkMessageProcessingStepImageIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepimageidunique");
-            }
-        }
+        public Guid? SdkMessageProcessingStepImageIdUnique => GetAttributeValue<Guid?>("sdkmessageprocessingstepimageidunique");
 
         [AttributeLogicalName("imagetype")]
         [JsonProperty(PropertyName = "imagetype")]
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue ImageType
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("imagetype");
-            }
-            set
-            {
-                SetAttributeValue("imagetype", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("imagetype");
+            set => SetAttributeValue("imagetype", value);
         }
 
         [AttributeLogicalName("componentstate")]
         [JsonProperty(PropertyName = "componentstate")]
         [JsonConverter(typeof(OptionSetValueConverter))]
-        public OptionSetValue ComponentState
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("componentstate");
-            }
-        }
+        public OptionSetValue ComponentState => GetAttributeValue<OptionSetValue>("componentstate");
 
         [AttributeLogicalName("description")]
         [Range(0, 256)]
         [JsonProperty(PropertyName = "description")]
         public string Description
         {
-            get
-            {
-                return GetAttributeValue<string>("description");
-            }
-            set
-            {
-                SetAttributeValue("Description", "description", value);
-            }
+            get => GetAttributeValue<string>("description");
+            set => SetAttributeValue("Description", "description", value);
         }
 
         [AttributeLogicalName("name")]
@@ -2057,14 +1130,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("relatedattributename")]
@@ -2072,14 +1139,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "relatedattributename")]
         public string RelatedAttributeName
         {
-            get
-            {
-                return GetAttributeValue<string>("relatedattributename");
-            }
-            set
-            {
-                SetAttributeValue("RelatedAttributeName", "relatedattributename", value);
-            }
+            get => GetAttributeValue<string>("relatedattributename");
+            set => SetAttributeValue("RelatedAttributeName", "relatedattributename", value);
         }
 
         [AttributeLogicalName("entityalias")]
@@ -2087,14 +1148,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "entityalias")]
         public string EntityAlias
         {
-            get
-            {
-                return GetAttributeValue<string>("entityalias");
-            }
-            set
-            {
-                SetAttributeValue("EntityAlias", "entityalias", value);
-            }
+            get => GetAttributeValue<string>("entityalias");
+            set => SetAttributeValue("EntityAlias", "entityalias", value);
         }
 
         [AttributeLogicalName("messagepropertyname")]
@@ -2102,14 +1157,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "messagepropertyname")]
         public string MessagePropertyName
         {
-            get
-            {
-                return GetAttributeValue<string>("messagepropertyname");
-            }
-            set
-            {
-                SetAttributeValue("MessagePropertyName", "messagepropertyname", value);
-            }
+            get => GetAttributeValue<string>("messagepropertyname");
+            set => SetAttributeValue("MessagePropertyName", "messagepropertyname", value);
         }
 
         [AttributeLogicalName("attributes")]
@@ -2117,231 +1166,108 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "attributes")]
         public new string Attributes
         {
-            get
-            {
-                return GetAttributeValue<string>("attributes");
-            }
-            set
-            {
-                SetAttributeValue("Attributes", "attributes", value);
-            }
+            get => GetAttributeValue<string>("attributes");
+            set => SetAttributeValue("Attributes", "attributes", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("sdkmessageprocessingstepid")]
         [JsonProperty(PropertyName = "sdkmessageprocessingstepid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessageprocessingstep" })]
         public EntityReference SdkMessageProcessingStepId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("sdkmessageprocessingstepid");
-            }
-            set
-            {
-                SetAttributeValue("sdkmessageprocessingstepid", value);
-            }
+            get => GetAttributeValue<EntityReference>("sdkmessageprocessingstepid");
+            set => SetAttributeValue("sdkmessageprocessingstepid", value);
         }
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("overwritetime")]
         [JsonProperty(PropertyName = "overwritetime")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? OverwriteTime
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("overwritetime");
-            }
-        }
+        public DateTime? OverwriteTime => GetAttributeValue<DateTime?>("overwritetime");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("ismanaged")]
         [JsonProperty(PropertyName = "ismanaged")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsManaged
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("ismanaged");
-            }
-        }
+        public bool? IsManaged => GetAttributeValue<bool?>("ismanaged");
 
-        public static SdkMessageProcessingStepImage FromJson(string json)
-        {
-            return FromJson<SdkMessageProcessingStepImage>(json);
-        }
+        public static SdkMessageProcessingStepImage FromJson(string json) => FromJson<SdkMessageProcessingStepImage>(json);
 
-        public static SdkMessageProcessingStepImage FromXml(string xml)
-        {
-            return FromXml<SdkMessageProcessingStepImage>(xml);
-        }
+        public static SdkMessageProcessingStepImage FromXml(string xml) => FromXml<SdkMessageProcessingStepImage>(xml);
 
-        public static SdkMessageProcessingStepImage FromXml(XObject xml)
-        {
-            return FromXml<SdkMessageProcessingStepImage>(xml);
-        }
+        public static SdkMessageProcessingStepImage FromXml(XObject xml) => FromXml<SdkMessageProcessingStepImage>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<SdkMessageProcessingStepImage>();
-        }
+        public string ToJson() => ToJson<SdkMessageProcessingStepImage>();
 
-        public string ToXml()
-        {
-            return ToXml<SdkMessageProcessingStepImage>();
-        }
+        public string ToXml() => ToXml<SdkMessageProcessingStepImage>();
     }
 
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class SdkMessageProcessingStepSecureConfig : ValidatableEntity, IIdentity
+    public partial class SdkMessageProcessingStepSecureConfig : ValidatableEntity, IIdentity<Guid>
     {
         public SdkMessageProcessingStepSecureConfig()
             : base(EntityLogicalName)
@@ -2362,10 +1288,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? SdkMessageProcessingStepSecureConfigId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepsecureconfigid");
-            }
+            get => GetAttributeValue<Guid?>("sdkmessageprocessingstepsecureconfigid");
             set
             {
                 SetAttributeValue("sdkmessageprocessingstepsecureconfigid", value);
@@ -2377,220 +1300,103 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                SdkMessageProcessingStepSecureConfigId = value;
-            }
+            get => base.Id;
+            set => SdkMessageProcessingStepSecureConfigId = value;
         }
 
         [AttributeLogicalName("sdkmessageprocessingstepsecureconfigidunique")]
         [JsonProperty(PropertyName = "sdkmessageprocessingstepsecureconfigidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SdkMessageProcessingStepSecureConfigIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessageprocessingstepsecureconfigidunique");
-            }
-        }
+        public Guid? SdkMessageProcessingStepSecureConfigIdUnique => GetAttributeValue<Guid?>("sdkmessageprocessingstepsecureconfigidunique");
 
         [AttributeLogicalName("secureconfig")]
         [Range(0, 1073741823)]
         [JsonProperty(PropertyName = "secureconfig")]
         public string SecureConfig
         {
-            get
-            {
-                return GetAttributeValue<string>("secureconfig");
-            }
-            set
-            {
-                SetAttributeValue("SecureConfig", "secureconfig", value);
-            }
+            get => GetAttributeValue<string>("secureconfig");
+            set => SetAttributeValue("SecureConfig", "secureconfig", value);
         }
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
-        public static SdkMessageProcessingStepSecureConfig FromJson(string json)
-        {
-            return FromJson<SdkMessageProcessingStepSecureConfig>(json);
-        }
+        public static SdkMessageProcessingStepSecureConfig FromJson(string json) => FromJson<SdkMessageProcessingStepSecureConfig>(json);
 
-        public static SdkMessageProcessingStepSecureConfig FromXml(string xml)
-        {
-            return FromXml<SdkMessageProcessingStepSecureConfig>(xml);
-        }
+        public static SdkMessageProcessingStepSecureConfig FromXml(string xml) => FromXml<SdkMessageProcessingStepSecureConfig>(xml);
 
-        public static SdkMessageProcessingStepSecureConfig FromXml(XObject xml)
-        {
-            return FromXml<SdkMessageProcessingStepSecureConfig>(xml);
-        }
+        public static SdkMessageProcessingStepSecureConfig FromXml(XObject xml) => FromXml<SdkMessageProcessingStepSecureConfig>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<SdkMessageProcessingStepSecureConfig>();
-        }
+        public string ToJson() => ToJson<SdkMessageProcessingStepSecureConfig>();
 
-        public string ToXml()
-        {
-            return ToXml<SdkMessageProcessingStepSecureConfig>();
-        }
+        public string ToXml() => ToXml<SdkMessageProcessingStepSecureConfig>();
     }
 
     [DataContract]
     [EntityLogicalName(EntityLogicalName)]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class ServiceEndpoint : ValidatableEntity, IIdentity
+    public partial class ServiceEndpoint : ValidatableEntity, IIdentity<Guid>
     {
         public ServiceEndpoint()
             : base(EntityLogicalName)
@@ -2611,10 +1417,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? ServiceEndpointId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("serviceendpointid");
-            }
+            get => GetAttributeValue<Guid?>("serviceendpointid");
             set
             {
                 SetAttributeValue("serviceendpointid", value);
@@ -2626,62 +1429,32 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                ServiceEndpointId = value;
-            }
+            get => base.Id;
+            set => ServiceEndpointId = value;
         }
 
         [AttributeLogicalName("supportingsolutionid")]
         [JsonProperty(PropertyName = "supportingsolutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SupportingSolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("supportingsolutionid");
-            }
-        }
+        public Guid? SupportingSolutionId => GetAttributeValue<Guid?>("supportingsolutionid");
 
         [AttributeLogicalName("solutionid")]
         [JsonProperty(PropertyName = "solutionid")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SolutionId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("solutionid");
-            }
-        }
+        public Guid? SolutionId => GetAttributeValue<Guid?>("solutionid");
 
         [AttributeLogicalName("serviceendpointidunique")]
         [JsonProperty(PropertyName = "serviceendpointidunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? ServiceEndpointIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("serviceendpointidunique");
-            }
-        }
+        public Guid? ServiceEndpointIdUnique => GetAttributeValue<Guid?>("serviceendpointidunique");
 
         [AttributeLogicalName("userclaim")]
         [JsonProperty(PropertyName = "userclaim")]
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue UserClaim
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("userclaim");
-            }
-            set
-            {
-                SetAttributeValue("userclaim", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("userclaim");
+            set => SetAttributeValue("userclaim", value);
         }
 
         [AttributeLogicalName("contract")]
@@ -2689,14 +1462,8 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue Contract
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("contract");
-            }
-            set
-            {
-                SetAttributeValue("contract", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("contract");
+            set => SetAttributeValue("contract", value);
         }
 
         [AttributeLogicalName("connectionmode")]
@@ -2704,40 +1471,22 @@ namespace CrmSdk
         [JsonConverter(typeof(OptionSetValueConverter))]
         public OptionSetValue ConnectionMode
         {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("connectionmode");
-            }
-            set
-            {
-                SetAttributeValue("connectionmode", value);
-            }
+            get => GetAttributeValue<OptionSetValue>("connectionmode");
+            set => SetAttributeValue("connectionmode", value);
         }
 
         [AttributeLogicalName("componentstate")]
         [JsonProperty(PropertyName = "componentstate")]
         [JsonConverter(typeof(OptionSetValueConverter))]
-        public OptionSetValue ComponentState
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("componentstate");
-            }
-        }
+        public OptionSetValue ComponentState => GetAttributeValue<OptionSetValue>("componentstate");
 
         [AttributeLogicalName("description")]
         [Range(0, 2000)]
         [JsonProperty(PropertyName = "description")]
         public string Description
         {
-            get
-            {
-                return GetAttributeValue<string>("description");
-            }
-            set
-            {
-                SetAttributeValue("Description", "description", value);
-            }
+            get => GetAttributeValue<string>("description");
+            set => SetAttributeValue("Description", "description", value);
         }
 
         [AttributeLogicalName("solutionnamespace")]
@@ -2745,14 +1494,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "solutionnamespace")]
         public string SolutionNamespace
         {
-            get
-            {
-                return GetAttributeValue<string>("solutionnamespace");
-            }
-            set
-            {
-                SetAttributeValue("SolutionNamespace", "solutionnamespace", value);
-            }
+            get => GetAttributeValue<string>("solutionnamespace");
+            set => SetAttributeValue("SolutionNamespace", "solutionnamespace", value);
         }
 
         [AttributeLogicalName("name")]
@@ -2760,14 +1503,8 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("name");
-            }
-            set
-            {
-                SetAttributeValue("Name", "name", value);
-            }
+            get => GetAttributeValue<string>("name");
+            set => SetAttributeValue("Name", "name", value);
         }
 
         [AttributeLogicalName("path")]
@@ -2775,185 +1512,86 @@ namespace CrmSdk
         [JsonProperty(PropertyName = "path")]
         public string Path
         {
-            get
-            {
-                return GetAttributeValue<string>("path");
-            }
-            set
-            {
-                SetAttributeValue("Path", "path", value);
-            }
+            get => GetAttributeValue<string>("path");
+            set => SetAttributeValue("Path", "path", value);
         }
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("overwritetime")]
         [JsonProperty(PropertyName = "overwritetime")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? OverwriteTime
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("overwritetime");
-            }
-        }
+        public DateTime? OverwriteTime => GetAttributeValue<DateTime?>("overwritetime");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("ismanaged")]
         [JsonProperty(PropertyName = "ismanaged")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsManaged
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("ismanaged");
-            }
-        }
+        public bool? IsManaged => GetAttributeValue<bool?>("ismanaged");
 
-        public static ServiceEndpoint FromJson(string json)
-        {
-            return FromJson<ServiceEndpoint>(json);
-        }
+        public static ServiceEndpoint FromJson(string json) => FromJson<ServiceEndpoint>(json);
 
-        public static ServiceEndpoint FromXml(string xml)
-        {
-            return FromXml<ServiceEndpoint>(xml);
-        }
+        public static ServiceEndpoint FromXml(string xml) => FromXml<ServiceEndpoint>(xml);
 
-        public static ServiceEndpoint FromXml(XObject xml)
-        {
-            return FromXml<ServiceEndpoint>(xml);
-        }
+        public static ServiceEndpoint FromXml(XObject xml) => FromXml<ServiceEndpoint>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<ServiceEndpoint>();
-        }
+        public string ToJson() => ToJson<ServiceEndpoint>();
 
-        public string ToXml()
-        {
-            return ToXml<ServiceEndpoint>();
-        }
+        public string ToXml() => ToXml<ServiceEndpoint>();
     }
 
     [DataContract]
     [EntityLogicalName("sdkmessagefilter")]
     [GeneratedCode("pkGenUtil", "0.0")]
-    public partial class SdkMessageFilter : ValidatableEntity, IIdentity
+    public partial class SdkMessageFilter : ValidatableEntity, IIdentity<Guid>
     {
         public SdkMessageFilter()
             : base(EntityLogicalName)
@@ -2974,10 +1612,7 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public Guid? SdkMessageFilterId
         {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessagefilterid");
-            }
+            get => GetAttributeValue<Guid?>("sdkmessagefilterid");
             set
             {
                 SetAttributeValue("sdkmessagefilterid", value);
@@ -2989,186 +1624,84 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<Guid>))]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                SdkMessageFilterId = value;
-            }
+            get => base.Id;
+            set => SdkMessageFilterId = value;
         }
 
         [AttributeLogicalName("sdkmessagefilteridunique")]
         [JsonProperty(PropertyName = "sdkmessagefilteridunique")]
         [JsonConverter(typeof(StructConverter<Guid>))]
-        public Guid? SdkMessageFilterIdUnique
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("sdkmessagefilteridunique");
-            }
-        }
+        public Guid? SdkMessageFilterIdUnique => GetAttributeValue<Guid?>("sdkmessagefilteridunique");
 
         [AttributeLogicalName("primaryobjecttypecode")]
         [JsonProperty(PropertyName = "primaryobjecttypecode")]
-        public string PrimaryEntityLogicalName
-        {
-            get
-            {
-                return GetAttributeValue<string>("primaryobjecttypecode");
-            }
-        }
+        public string PrimaryEntityLogicalName => GetAttributeValue<string>("primaryobjecttypecode");
 
         [AttributeLogicalName("secondaryobjecttypecode")]
         [JsonProperty(PropertyName = "secondaryobjecttypecode")]
-        public string SecondaryEntityLogicalName
-        {
-            get
-            {
-                return GetAttributeValue<string>("secondaryobjecttypecode");
-            }
-        }
+        public string SecondaryEntityLogicalName => GetAttributeValue<string>("secondaryobjecttypecode");
 
         [AttributeLogicalName("createdonbehalfbyyominame")]
         [JsonProperty(PropertyName = "createdonbehalfbyyominame")]
-        public string CreatedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyyominame");
-            }
-        }
+        public string CreatedOnBehalfByYomiName => GetAttributeValue<string>("createdonbehalfbyyominame");
 
         [AttributeLogicalName("modifiedbyname")]
         [JsonProperty(PropertyName = "modifiedbyname")]
-        public string ModifiedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedbyname");
-            }
-        }
+        public string ModifiedByName => GetAttributeValue<string>("modifiedbyname");
 
         [AttributeLogicalName("sdkmessageidname")]
         [JsonProperty(PropertyName = "sdkmessageidname")]
-        public string SdkMessageIdName
-        {
-            get
-            {
-                return GetAttributeValue<string>("sdkmessageidname");
-            }
-        }
+        public string SdkMessageIdName => GetAttributeValue<string>("sdkmessageidname");
 
         [AttributeLogicalName("modifiedonbehalfbyyominame")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyyominame")]
-        public string ModifiedOnBehalfByYomiName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyyominame");
-            }
-        }
+        public string ModifiedOnBehalfByYomiName => GetAttributeValue<string>("modifiedonbehalfbyyominame");
 
         [AttributeLogicalName("createdbyname")]
         [JsonProperty(PropertyName = "createdbyname")]
-        public string CreatedByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdbyname");
-            }
-        }
+        public string CreatedByName => GetAttributeValue<string>("createdbyname");
 
         [AttributeLogicalName("modifiedonbehalfbyname")]
         [JsonProperty(PropertyName = "modifiedonbehalfbyname")]
-        public string ModifiedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("modifiedonbehalfbyname");
-            }
-        }
+        public string ModifiedOnBehalfByName => GetAttributeValue<string>("modifiedonbehalfbyname");
 
         [AttributeLogicalName("createdonbehalfbyname")]
         [JsonProperty(PropertyName = "createdonbehalfbyname")]
-        public string CreatedOnBehalfByName
-        {
-            get
-            {
-                return GetAttributeValue<string>("createdonbehalfbyname");
-            }
-        }
+        public string CreatedOnBehalfByName => GetAttributeValue<string>("createdonbehalfbyname");
 
         [AttributeLogicalName("sdkmessageid")]
         [JsonProperty(PropertyName = "sdkmessageid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "sdkmessage" })]
         public EntityReference SdkMessageId
         {
-            get
-            {
-                return GetAttributeValue<EntityReference>("sdkmessageid");
-            }
-            set
-            {
-                SetAttributeValue("sdkmessageid", value);
-            }
+            get => GetAttributeValue<EntityReference>("sdkmessageid");
+            set => SetAttributeValue("sdkmessageid", value);
         }
 
         [AttributeLogicalName("modifiedonbehalfby")]
         [JsonProperty(PropertyName = "modifiedonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedonbehalfby");
-            }
-        }
+        public EntityReference ModifiedOnBehalfBy => GetAttributeValue<EntityReference>("modifiedonbehalfby");
 
         [AttributeLogicalName("createdonbehalfby")]
         [JsonProperty(PropertyName = "createdonbehalfby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedOnBehalfBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdonbehalfby");
-            }
-        }
+        public EntityReference CreatedOnBehalfBy => GetAttributeValue<EntityReference>("createdonbehalfby");
 
         [AttributeLogicalName("organizationid")]
         [JsonProperty(PropertyName = "organizationid")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "organization" })]
-        public EntityReference OrganizationId
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("organizationid");
-            }
-        }
+        public EntityReference OrganizationId => GetAttributeValue<EntityReference>("organizationid");
 
         [AttributeLogicalName("modifiedby")]
         [JsonProperty(PropertyName = "modifiedby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference ModifiedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("modifiedby");
-            }
-        }
+        public EntityReference ModifiedBy => GetAttributeValue<EntityReference>("modifiedby");
 
         [AttributeLogicalName("createdby")]
         [JsonProperty(PropertyName = "createdby")]
         [JsonConverter(typeof(EntityReferenceConverter), new object[] { "systemuser" })]
-        public EntityReference CreatedBy
-        {
-            get
-            {
-                return GetAttributeValue<EntityReference>("createdby");
-            }
-        }
+        public EntityReference CreatedBy => GetAttributeValue<EntityReference>("createdby");
 
         [AttributeLogicalName("availability")]
         [Range(-2147483648, 2147483647)]
@@ -3176,98 +1709,47 @@ namespace CrmSdk
         [JsonConverter(typeof(StructConverter<int>))]
         public int? Availability
         {
-            get
-            {
-                return GetAttributeValue<int?>("availability");
-            }
-            set
-            {
-                SetAttributeValue("Availability", "availability", value);
-            }
+            get => GetAttributeValue<int?>("availability");
+            set => SetAttributeValue("Availability", "availability", value);
         }
 
         [AttributeLogicalName("customizationlevel")]
         [JsonProperty(PropertyName = "customizationlevel")]
         [JsonConverter(typeof(StructConverter<int>))]
-        public int? CustomizationLevel
-        {
-            get
-            {
-                return GetAttributeValue<int?>("customizationlevel");
-            }
-        }
+        public int? CustomizationLevel => GetAttributeValue<int?>("customizationlevel");
 
         [AttributeLogicalName("modifiedon")]
         [JsonProperty(PropertyName = "modifiedon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? ModifiedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("modifiedon");
-            }
-        }
+        public DateTime? ModifiedOn => GetAttributeValue<DateTime?>("modifiedon");
 
         [AttributeLogicalName("createdon")]
         [JsonProperty(PropertyName = "createdon")]
         [JsonConverter(typeof(StructConverter<DateTime>))]
-        public DateTime? CreatedOn
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
-            }
-        }
+        public DateTime? CreatedOn => GetAttributeValue<DateTime?>("createdon");
 
         [AttributeLogicalName("iscustomprocessingstepallowed")]
         [JsonProperty(PropertyName = "iscustomprocessingstepallowed")]
         [JsonConverter(typeof(StructConverter<bool>))]
         public bool? IsCustomProcessingStepAllowed
         {
-            get
-            {
-                return GetAttributeValue<bool?>("iscustomprocessingstepallowed");
-            }
-            set
-            {
-                SetAttributeValue("iscustomprocessingstepallowed", value);
-            }
+            get => GetAttributeValue<bool?>("iscustomprocessingstepallowed");
+            set => SetAttributeValue("iscustomprocessingstepallowed", value);
         }
 
         [AttributeLogicalName("isvisible")]
         [JsonProperty(PropertyName = "isvisible")]
         [JsonConverter(typeof(StructConverter<bool>))]
-        public bool? IsVisible
-        {
-            get
-            {
-                return GetAttributeValue<bool?>("isvisible");
-            }
-        }
+        public bool? IsVisible => GetAttributeValue<bool?>("isvisible");
 
-        public static SdkMessageFilter FromJson(string json)
-        {
-            return FromJson<SdkMessageFilter>(json);
-        }
+        public static SdkMessageFilter FromJson(string json) => FromJson<SdkMessageFilter>(json);
 
-        public static SdkMessageFilter FromXml(string xml)
-        {
-            return FromXml<SdkMessageFilter>(xml);
-        }
+        public static SdkMessageFilter FromXml(string xml) => FromXml<SdkMessageFilter>(xml);
 
-        public static SdkMessageFilter FromXml(XObject xml)
-        {
-            return FromXml<SdkMessageFilter>(xml);
-        }
+        public static SdkMessageFilter FromXml(XObject xml) => FromXml<SdkMessageFilter>(xml);
 
-        public string ToJson()
-        {
-            return ToJson<SdkMessageFilter>();
-        }
+        public string ToJson() => ToJson<SdkMessageFilter>();
 
-        public string ToXml()
-        {
-            return ToXml<SdkMessageFilter>();
-        }
+        public string ToXml() => ToXml<SdkMessageFilter>();
     }
 }

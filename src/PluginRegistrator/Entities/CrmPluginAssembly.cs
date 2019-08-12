@@ -27,10 +27,7 @@ namespace PluginRegistrator.Entities
 
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get => name;
 
             set
             {
@@ -41,22 +38,21 @@ namespace PluginRegistrator.Entities
 
                 name = value;
 
-                if (crmPlugins != null)
+                if (crmPlugins == null)
                 {
-                    foreach (var plugin in crmPlugins)
-                    {
-                        plugin.AssemblyName = value;
-                    }
+                    return;
+                }
+
+                foreach (var plugin in crmPlugins)
+                {
+                    plugin.AssemblyName = value;
                 }
             }
         }
 
         public Guid AssemblyId
         {
-            get
-            {
-                return assemblyId;
-            }
+            get => assemblyId;
 
             set
             {
@@ -67,12 +63,14 @@ namespace PluginRegistrator.Entities
 
                 assemblyId = value;
 
-                if (crmPlugins != null)
+                if (crmPlugins == null)
                 {
-                    foreach (var plugin in crmPlugins)
-                    {
-                        plugin.AssemblyId = value;
-                    }
+                    return;
+                }
+
+                foreach (var plugin in crmPlugins)
+                {
+                    plugin.AssemblyId = value;
                 }
             }
         }
@@ -93,26 +91,11 @@ namespace PluginRegistrator.Entities
 
         public Version SdkVersion { get; set; }
 
-        public IEnumerable<CrmPlugin> CrmPlugins
-        {
-            get { return crmPlugins; }
-        }
+        public IEnumerable<CrmPlugin> CrmPlugins => crmPlugins;
 
-        public string EntityLogicalName
-        {
-            get
-            {
-                return PluginAssembly.EntityLogicalName;
-            }
-        }
+        public string EntityLogicalName => PluginAssembly.EntityLogicalName;
 
-        public Guid Id
-        {
-            get
-            {
-                return AssemblyId;
-            }
-        }
+        public Guid Id => AssemblyId;
 
         public void AddPlugin(CrmPlugin plugin)
         {

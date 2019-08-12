@@ -34,10 +34,7 @@ namespace PluginRegistrator.Entities
 
         public Guid Id
         {
-            get
-            {
-                return id;
-            }
+            get => id;
 
             set
             {
@@ -57,10 +54,7 @@ namespace PluginRegistrator.Entities
 
         public Guid AssemblyId
         {
-            get
-            {
-                return assemblyId;
-            }
+            get => assemblyId;
 
             set
             {
@@ -71,22 +65,21 @@ namespace PluginRegistrator.Entities
 
                 assemblyId = value;
 
-                if (Images != null)
+                if (Images == null)
                 {
-                    foreach (var image in Images)
-                    {
-                        image.AssemblyId = value;
-                    }
+                    return;
+                }
+
+                foreach (var image in Images)
+                {
+                    image.AssemblyId = value;
                 }
             }
         }
 
         public Guid PluginId
         {
-            get
-            {
-                return pluginId;
-            }
+            get => pluginId;
 
             set
             {
@@ -97,12 +90,14 @@ namespace PluginRegistrator.Entities
 
                 pluginId = value;
 
-                if (Images != null)
+                if (Images == null)
                 {
-                    foreach (var image in Images)
-                    {
-                        image.PluginId = value;
-                    }
+                    return;
+                }
+
+                foreach (var image in Images)
+                {
+                    image.PluginId = value;
                 }
             }
         }
@@ -143,15 +138,9 @@ namespace PluginRegistrator.Entities
 
         public bool DeleteAsyncOperationIfSuccessful { get; set; }
 
-        public List<CrmPluginImage> Images { get; private set; }
+        public List<CrmPluginImage> Images { get; }
 
-        public string EntityLogicalName
-        {
-            get
-            {
-                return SdkMessageProcessingStep.EntityLogicalName;
-            }
-        }
+        public string EntityLogicalName => SdkMessageProcessingStep.EntityLogicalName;
 
         public void AddImage(CrmPluginImage image)
         {
@@ -171,7 +160,9 @@ namespace PluginRegistrator.Entities
                 new SdkMessageProcessingStep
                     {
                         Configuration = UnsecureConfiguration,
-                        EventHandler = ServiceBusConfigurationId == Guid.Empty ? new EntityReference(PluginType.EntityLogicalName, PluginId) : new EntityReference(ServiceEndpoint.EntityLogicalName, ServiceBusConfigurationId),
+                        EventHandler = ServiceBusConfigurationId == Guid.Empty
+                            ? new EntityReference(PluginType.EntityLogicalName, PluginId)
+                            : new EntityReference(ServiceEndpoint.EntityLogicalName, ServiceBusConfigurationId),
                         Name = Name,
                         Mode = new OptionSetValue((int)Mode),
                         Rank = Rank,
@@ -200,8 +191,7 @@ namespace PluginRegistrator.Entities
 
         public override bool Equals(object obj)
         {
-            var other = obj as CrmPluginStep;
-            if (other == null)
+            if (!(obj is CrmPluginStep other))
             {
                 return false;
             }
@@ -275,7 +265,7 @@ namespace PluginRegistrator.Entities
 
             if (step.StateCode != null)
             {
-                Enabled = step.StateCode.Value == SdkMessageProcessingStepState.Включено;
+                Enabled = step.StateCode.Value == SdkMessageProcessingStepState.On;
             }
 
             if (step.ImpersonatingUserId != null)

@@ -37,10 +37,7 @@ namespace PluginRegistrator.Entities
 
         public Guid ServiceEndpointId { get; set; }
 
-        public Guid PluginId
-        {
-            get { return ServiceBusPluginId; }
-        }
+        public Guid PluginId => ServiceBusPluginId;
 
         public string AcsManagementKey { get; set; }
 
@@ -48,15 +45,9 @@ namespace PluginRegistrator.Entities
 
         public string AcsIssuerName { get; set; }
 
-        public string EntityLogicalName
-        {
-            get { return ServiceEndpoint.EntityLogicalName; }
-        }
+        public string EntityLogicalName => ServiceEndpoint.EntityLogicalName;
 
-        public Guid Id
-        {
-            get { return ServiceEndpointId; }
-        }
+        public Guid Id => ServiceEndpointId;
 
         public IEnumerable<CrmPluginStep> Steps
         {

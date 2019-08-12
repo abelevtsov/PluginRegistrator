@@ -23,21 +23,11 @@ namespace PluginRegistrator
         {
         }
 
-        public static CrmMessage Instance
-        {
-            get
-            {
-                return InstanceHolder.Value;
-            }
-        }
+        public static CrmMessage Instance => InstanceHolder.Value;
 
-        public string this[string methodName]
-        {
-            get
-            {
-                string value;
-                return MessagePropertyNames.TryGetValue(methodName.Replace("On", string.Empty), out value) ? value : null;
-            }
-        }
+        public string this[string methodName] =>
+            MessagePropertyNames.TryGetValue(methodName.Replace("On", string.Empty), out var value)
+                ? value
+                : null;
     }
 }

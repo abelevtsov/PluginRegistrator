@@ -8,16 +8,13 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 {
     internal class MoneyConverter : JsonConverter
     {
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType.IsAssignableFrom(typeof(Money));
-        }
+        public override bool CanConvert(Type objectType) => objectType.IsAssignableFrom(typeof(Money));
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var jtoken = JToken.Load(reader);
             try
             {
+                var jtoken = JToken.Load(reader);
                 var value = jtoken.Value<decimal>();
                 return new Money(value);
             }
@@ -29,14 +26,14 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var money = value as Money;
-            if (money == null || money.Value == 0M)
+            switch (value)
             {
-                serializer.Serialize(writer, string.Empty);
-            }
-            else
-            {
-                serializer.Serialize(writer, money.Value);
+                case Money money when money.Value != default:
+                    serializer.Serialize(writer, money.Value);
+                    break;
+                default:
+                    serializer.Serialize(writer, string.Empty);
+                    break;
             }
         }
     }

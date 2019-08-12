@@ -7,9 +7,9 @@ using Newtonsoft.Json.Serialization;
 
 namespace PluginRegistrator.DataContracts.Json
 {
-    public class ProxyClassContractResolver<T> : DefaultContractResolver where T : Entity
+    public class ProxyClassContractResolver<TEntity> : DefaultContractResolver where TEntity : Entity
     {
-        private readonly Type currentType = typeof(T);
+        private readonly Type currentType = typeof(TEntity);
 
         protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {

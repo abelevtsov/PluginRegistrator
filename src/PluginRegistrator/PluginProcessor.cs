@@ -85,11 +85,12 @@ namespace PluginRegistrator
                 var workflows =
                         (from plugin in currentAssembly.CrmPlugins
                          where plugin.PluginType == CrmPluginType.WorkflowActivity
-                         select new PluginType
-                         {
-                             Id = plugin.Id,
-                             WorkflowActivityGroupName = plugin.WorkflowActivityGroupName
-                         }).ToArray();
+                         select
+                             new PluginType
+                                 {
+                                     Id = plugin.Id,
+                                     WorkflowActivityGroupName = plugin.WorkflowActivityGroupName
+                                 }).ToArray();
 
                 UpdateAssemblyInDB(mergedPluginAssemblyPath, assembly, workflows);
             }
@@ -183,29 +184,19 @@ namespace PluginRegistrator
             }
         }
 
-        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, string pathToUnsecureConfigFile)
-        {
-            return AssemblyReader.RetrievePluginsFromAssembly(path, pathToUnsecureConfigFile);
-        }
+        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, string pathToUnsecureConfigFile) =>
+            AssemblyReader.RetrievePluginsFromAssembly(path, pathToUnsecureConfigFile);
 
-        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, XDocument config)
-        {
-            return AssemblyReader.RetrievePluginsFromAssembly(path, config);
-        }
+        private static CrmPluginAssembly LoadAssemblyFromDisk(string path, XDocument config) =>
+            AssemblyReader.RetrievePluginsFromAssembly(path, config);
 
-        private static CrmPluginAssembly LoadAssemblyFromDB(string assemblyName)
-        {
-            return AssemblyReader.LoadAssemblyFromDB(assemblyName);
-        }
+        private static CrmPluginAssembly LoadAssemblyFromDB(string assemblyName) =>
+            AssemblyReader.LoadAssemblyFromDB(assemblyName);
 
-        private static void UpdateAssemblyInDB(string pathToAssembly, ICrmEntity assembly, params PluginType[] workflows)
-        {
+        private static void UpdateAssemblyInDB(string pathToAssembly, ICrmEntity assembly, params PluginType[] workflows) =>
             AssemblyReader.UpdateAssemblyInDB(pathToAssembly, assembly, workflows);
-        }
 
-        private static Guid CreateAssemblyInDB(string pathToAssembly, ICrmEntity assembly)
-        {
-            return AssemblyReader.CreateAssemblyInDB(pathToAssembly, assembly);
-        }
+        private static Guid CreateAssemblyInDB(string pathToAssembly, ICrmEntity assembly) =>
+            AssemblyReader.CreateAssemblyInDB(pathToAssembly, assembly);
     }
 }

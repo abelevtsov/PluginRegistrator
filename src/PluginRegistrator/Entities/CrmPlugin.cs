@@ -42,10 +42,7 @@ namespace PluginRegistrator.Entities
 
         public Guid AssemblyId
         {
-            get
-            {
-                return pluginAssemblyId;
-            }
+            get => pluginAssemblyId;
 
             set
             {
@@ -63,25 +60,13 @@ namespace PluginRegistrator.Entities
             }
         }
 
-        public IEnumerable<CrmPluginStep> Steps
-        {
-            get { return steps; }
-        }
+        public IEnumerable<CrmPluginStep> Steps => steps;
 
-        public string EntityLogicalName
-        {
-            get
-            {
-                return CrmSdk.PluginType.EntityLogicalName;
-            }
-        }
+        public string EntityLogicalName => CrmSdk.PluginType.EntityLogicalName;
 
         public Guid Id
         {
-            get
-            {
-                return id;
-            }
+            get => id;
 
             set
             {
@@ -138,8 +123,7 @@ namespace PluginRegistrator.Entities
 
         public override bool Equals(object obj)
         {
-            var other = obj as CrmPlugin;
-            if (other == null)
+            if (!(obj is CrmPlugin other))
             {
                 return false;
             }

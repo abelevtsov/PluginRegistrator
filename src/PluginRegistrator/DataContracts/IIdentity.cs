@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace PluginRegistrator.DataContracts
+﻿namespace PluginRegistrator.DataContracts
 {
-    public interface IIdentity
+    public interface IIdentity<TKey> where TKey : struct
     {
-        Guid Id { get; set; }
+        TKey Id { get; set; }
     }
 }

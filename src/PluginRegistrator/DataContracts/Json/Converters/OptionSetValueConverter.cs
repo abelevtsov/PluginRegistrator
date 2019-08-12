@@ -8,16 +8,13 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 {
     internal class OptionSetValueConverter : JsonConverter
     {
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType.IsAssignableFrom(typeof(OptionSetValue));
-        }
+        public override bool CanConvert(Type objectType) => objectType.IsAssignableFrom(typeof(OptionSetValue));
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var jtoken = JToken.Load(reader);
             try
             {
+                var jtoken = JToken.Load(reader);
                 return new OptionSetValue(jtoken.Value<int>());
             }
             catch
@@ -28,14 +25,14 @@ namespace PluginRegistrator.DataContracts.Json.Converters
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var option = value as OptionSetValue;
-            if (option == null || option.Value == 0)
+            switch (value)
             {
-                serializer.Serialize(writer, string.Empty);
-            }
-            else
-            {
-                serializer.Serialize(writer, option.Value);
+                case OptionSetValue option when option.Value != default:
+                    serializer.Serialize(writer, option.Value);
+                    break;
+                default:
+                    serializer.Serialize(writer, string.Empty);
+                    break;
             }
         }
     }

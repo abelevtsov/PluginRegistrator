@@ -224,12 +224,15 @@ namespace PluginRegistrator
         private static void FillPluginsFromAssembly(this CrmPluginAssembly pluginAssembly, Assembly assembly, IReadOnlyCollection<XElement> unsecureConfigItems)
         {
             Version sdkVersion = null;
-            foreach (var t in assembly.GetExportedTypes()
-                                      .Where(
-                                        t =>
-                                            !t.IsAbstract &&
-                                            t.IsClass &&
-                                            (t.Name.EndsWith("Plugin") || t.Name.EndsWith("Activity"))))
+            var types =
+                    assembly
+                        .GetExportedTypes()
+                        .Where(
+                            t =>
+                                !t.IsAbstract &&
+                                t.IsClass &&
+                                (t.Name.EndsWith("Plugin") || t.Name.EndsWith("Activity")));
+            foreach (var t in types)
             {
                 CrmPluginType type;
                 CrmPluginIsolatable isolatable;
@@ -275,7 +278,7 @@ namespace PluginRegistrator
                     plugin.Name = " " + attr.Name;
                 }
 
-                var pluginEntityType = t.BaseType.GetGenericArguments().LastOrDefault();
+                var pluginEntityType = t.BaseType?.GetGenericArguments().LastOrDefault();
                 if (pluginEntityType == null)
                 {
                     // be sure - it is workflow:)
@@ -283,9 +286,9 @@ namespace PluginRegistrator
                     continue;
                 }
 
-                var splitted = t.FullName.Split('.').Reverse().Take(2).ToArray();
-                var typeName = splitted[0].Replace("Plugin", string.Empty);
-                plugin.Name = $" {splitted[1]}: {typeName}";
+                var splitted = t.FullName?.Split('.').Reverse().Take(2).ToArray();
+                var typeName = splitted?[0].Replace("Plugin", string.Empty);
+                plugin.Name = $" {splitted?[1]}: {typeName}";
 
                 var stepMethods = t.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.DeclaringType == t).ToArray();
                 foreach (var stepMethod in stepMethods)
@@ -370,12 +373,13 @@ namespace PluginRegistrator
         private static void FillPluginsFromAssembly(this CrmPluginAssembly pluginAssembly, Version sdkVersion, XDocument config)
         {
             XNamespace ns = "http://schemas.microsoft.com/crm/2011/tools/pluginregistration";
-            foreach (var pluginElement in config.Root.Element(ns + "Solutions").Element(ns + "Solution").Element(ns + "PluginTypes").Elements(ns + "Plugin"))
+            var pluginElements = config.Root.Element(ns + "Solutions").Element(ns + "Solution").Element(ns + "PluginTypes").Elements(ns + "Plugin");
+            foreach (var pluginElement in pluginElements)
             {
-                var typeName = pluginElement.Attribute("TypeName").Value;
                 CrmPluginType type;
                 CrmPluginIsolatable isolatable;
 
+                var typeName = pluginElement.Attribute("TypeName").Value;
                 if (typeName.EndsWith("Plugin"))
                 {
                     type = CrmPluginType.Plugin;
@@ -404,7 +408,7 @@ namespace PluginRegistrator
                             AssemblyName = pluginAssembly.Name,
                             Isolatable = isolatable,
                             FriendlyName = pluginElement.Attribute("FriendlyName").Value
-                    };
+                        };
 
                 if (type == CrmPluginType.WorkflowActivity)
                 {
@@ -435,7 +439,7 @@ namespace PluginRegistrator
                                 Mode = pluginStepAttr.Attribute("Mode").Value == PluginExecutionMode.Asynchronous.ToString().ToLowerInvariant() ? CrmPluginStepMode.Asynchronous : CrmPluginStepMode.Synchronous,
                                 MessageId = Messages.First(m => m.Name == pluginStepAttr.Attribute("MessageName").Value).Id,
                                 Description = pluginStepAttr.Attribute("Description").Value
-                        };
+                            };
                     var filter =
                         MessageFilters.FirstOrDefault(
                             f =>
@@ -467,29 +471,31 @@ namespace PluginRegistrator
                         // note: ignore EntityAlias for convenience
                         if (p.Attribute("ImageType").Value == "PreImage")
                         {
-                            image = new CrmPluginImage(
-                                step.AssemblyId,
-                                step.PluginId,
-                                step.Id,
-                                !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
-                                null,
-                                "preimage",
-                                CrmPluginImageType.PreImage,
-                                CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
+                            image =
+                                new CrmPluginImage(
+                                    step.AssemblyId,
+                                    step.PluginId,
+                                    step.Id,
+                                    !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
+                                    null,
+                                    "preimage",
+                                    CrmPluginImageType.PreImage,
+                                    CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
                             image.Name = "preimage";
                         }
 
                         if (p.Attribute("ImageType").Value == "PostImage")
                         {
-                            image = new CrmPluginImage(
-                                step.AssemblyId,
-                                step.PluginId,
-                                step.Id,
-                                !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
-                                null,
-                                "postimage",
-                                CrmPluginImageType.PostImage,
-                                CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
+                            image =
+                                new CrmPluginImage(
+                                    step.AssemblyId,
+                                    step.PluginId,
+                                    step.Id,
+                                    !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
+                                    null,
+                                    "postimage",
+                                    CrmPluginImageType.PostImage,
+                                    CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
                             image.Name = "postimage";
                         }
 
