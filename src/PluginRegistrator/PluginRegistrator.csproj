@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyReader.cs" />
+    <Compile Include="Helpers\AssemblyReader.cs" />
     <Compile Include="CrmMessage.cs" />
     <Compile Include="DataContracts\IIdentity.cs" />
     <Compile Include="DataContracts\Json\Converters\EntityReferenceConverter.cs" />
@@ -96,7 +96,7 @@
     </Compile>
     <Compile Include="PluginProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationHelper.cs" />
+    <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using CrmSdk;
 using Microsoft.Xrm.Sdk;
 using PluginRegistrator.Entities;
+using PluginRegistrator.Helpers;
 
 namespace PluginRegistrator
 {

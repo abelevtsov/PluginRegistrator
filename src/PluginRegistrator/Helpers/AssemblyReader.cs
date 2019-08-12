@@ -14,7 +14,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using PluginRegistrator.Entities;
 
-namespace PluginRegistrator
+namespace PluginRegistrator.Helpers
 {
     public static class AssemblyReader
     {
@@ -158,7 +158,7 @@ namespace PluginRegistrator
 
             pluginAssembly.Content = Convert.ToBase64String(File.ReadAllBytes(pathToAssembly));
 
-            if (workflows != null && workflows.Length > 0)
+            if (workflows?.Length > 0)
             {
                 pluginAssembly.pluginassembly_plugintype = workflows;
             }
@@ -186,10 +186,8 @@ namespace PluginRegistrator
             return OrgService.Create(pluginAssembly);
         }
 
-        private static Assembly LoadAssembly(string path)
-        {
-            return Assembly.LoadFrom(path);
-        }
+        // ToDo: reflection only load
+        private static Assembly LoadAssembly(string path) => Assembly.LoadFrom(path);
 
         private static CrmPluginAssembly ToCrmPluginAssembly(this Assembly assembly)
         {

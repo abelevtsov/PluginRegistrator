@@ -10,7 +10,7 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using PluginRegistrator.Entities;
 
-namespace PluginRegistrator
+namespace PluginRegistrator.Helpers
 {
     public static class RegistrationHelper
     {

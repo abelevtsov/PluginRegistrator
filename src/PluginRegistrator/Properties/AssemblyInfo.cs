@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PluginRegistrator")]
-[assembly: AssemblyCopyright("Copyright © Aleksandr Belevtsov (OwnSpace) 2017")]
+[assembly: AssemblyCopyright("Copyright © abelevtsov 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
