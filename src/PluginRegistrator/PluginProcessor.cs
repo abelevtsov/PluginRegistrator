@@ -14,12 +14,13 @@ namespace PluginRegistrator
     {
         public PluginProcessor(IOrganizationService orgService)
         {
-            OrgService = orgService;
-            AssemblyHelper.OrgService = OrgService;
-            RegistrationHelper.OrgService = OrgService;
+            RegistrationHelper = new RegistrationHelper(orgService);
+            AssemblyHelper = new AssemblyHelper(orgService, RegistrationHelper);
         }
 
-        private IOrganizationService OrgService { get; }
+        private AssemblyHelper AssemblyHelper { get; }
+
+        private RegistrationHelper RegistrationHelper { get; }
 
         public void Process(string pluginsPath, string mergedPluginAssemblyPath, string unsecureConfigFilePath)
         {
@@ -34,14 +35,14 @@ namespace PluginRegistrator
             Process(assembly, mergedPluginAssemblyPath);
         }
 
-        private static void Process(CrmPluginAssembly assembly, string mergedPluginAssemblyPath)
+        private void Process(CrmPluginAssembly assembly, string mergedPluginAssemblyPath)
         {
             // ToDo: use DataFlow
             var currentAssembly = AssemblyHelper.LoadAssemblyFromDB(assembly.Name);
             var createAssembly = currentAssembly == null;
             var pluginsForRegister = new List<CrmPlugin>();
             var pluginsForRemove = new List<CrmPlugin>();
-            var pluginsForUpdate = new List<Tuple<CrmPlugin, CrmPlugin>>();
+            var pluginsForUpdate = new List<(CrmPlugin plugin, CrmPlugin existed)>();
 
             if (createAssembly)
             {
@@ -49,19 +50,23 @@ namespace PluginRegistrator
             }
             else
             {
-                Func<CrmPluginAssembly, CrmPlugin, CrmPlugin> getCorrelated = (a, plugin) => a.CrmPlugins.FirstOrDefault(p => p.TypeName == plugin.TypeName);
-                pluginsForRegister.AddRange(from plugin in assembly.CrmPlugins
-                                            where getCorrelated(currentAssembly, plugin) == null
-                                            select plugin);
+                CrmPlugin GetCorrelated(CrmPluginAssembly a, CrmPlugin plugin) => a.CrmPlugins.FirstOrDefault(p => p.TypeName == plugin.TypeName);
 
-                pluginsForRemove.AddRange(from plugin in currentAssembly.CrmPlugins
-                                          where getCorrelated(assembly, plugin) == null
-                                          select plugin);
+                pluginsForRegister.AddRange(
+                    from plugin in assembly.CrmPlugins
+                    where GetCorrelated(currentAssembly, plugin) == null
+                    select plugin);
 
-                pluginsForUpdate.AddRange(from plugin in assembly.CrmPlugins
-                                          let existed = getCorrelated(currentAssembly, plugin)
-                                          where existed != null
-                                          select new Tuple<CrmPlugin, CrmPlugin>(plugin, existed));
+                pluginsForRemove.AddRange(
+                    from plugin in currentAssembly.CrmPlugins
+                    where GetCorrelated(assembly, plugin) == null
+                    select plugin);
+
+                pluginsForUpdate.AddRange(
+                    from plugin in assembly.CrmPlugins
+                    let existed = GetCorrelated(currentAssembly, plugin)
+                    where existed != null
+                    select (plugin, existed));
             }
 
             if (createAssembly)
@@ -101,7 +106,7 @@ namespace PluginRegistrator
             UpdatePlugins(pluginsForUpdate);
         }
 
-        private static void UnregisterPlugins(IEnumerable<CrmPlugin> plugins)
+        private void UnregisterPlugins(IEnumerable<CrmPlugin> plugins)
         {
             foreach (var plugin in plugins)
             {
@@ -109,7 +114,7 @@ namespace PluginRegistrator
             }
         }
 
-        private static void RegisterPlugins(IEnumerable<CrmPlugin> plugins)
+        private void RegisterPlugins(IEnumerable<CrmPlugin> plugins)
         {
             foreach (var plugin in plugins)
             {
@@ -117,12 +122,10 @@ namespace PluginRegistrator
             }
         }
 
-        private static void UpdatePlugins(IEnumerable<Tuple<CrmPlugin, CrmPlugin>> plugins)
+        private void UpdatePlugins(IEnumerable<(CrmPlugin, CrmPlugin)> plugins)
         {
-            foreach (var pair in plugins)
+            foreach (var (plugin, currentPlugin) in plugins)
             {
-                var plugin = pair.Item1;
-                var currentPlugin = pair.Item2;
                 plugin.Id = currentPlugin.Id;
                 if (!plugin.Equals(currentPlugin))
                 {

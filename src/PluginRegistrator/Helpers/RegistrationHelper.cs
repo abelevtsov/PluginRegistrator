@@ -12,9 +12,11 @@ using PluginRegistrator.Entities;
 
 namespace PluginRegistrator.Helpers
 {
-    public static class RegistrationHelper
+    public class RegistrationHelper
     {
-        public static IOrganizationService OrgService { private get; set; }
+        public RegistrationHelper(IOrganizationService orgService) => OrgService = orgService;
+
+        private IOrganizationService OrgService { get; }
 
         public static string GenerateStepName(string typeName, string messageName, string primaryEntityName, string secondaryEntityName)
         {
@@ -62,7 +64,7 @@ namespace PluginRegistrator.Helpers
             return nameBuilder.ToString();
         }
 
-        public static Guid RegisterServiceEndpoint(CrmServiceEndpoint serviceEndpoint)
+        public Guid RegisterServiceEndpoint(CrmServiceEndpoint serviceEndpoint)
         {
             if (serviceEndpoint == null)
             {
@@ -79,7 +81,7 @@ namespace PluginRegistrator.Helpers
             return serviceEndpoint.Id;
         }
 
-        public static Guid RegisterPlugin(CrmPlugin plugin)
+        public Guid RegisterPlugin(CrmPlugin plugin)
         {
             if (plugin == null)
             {
@@ -101,7 +103,7 @@ namespace PluginRegistrator.Helpers
             return plugin.Id;
         }
 
-        public static Guid RegisterStep(CrmPluginStep step)
+        public Guid RegisterStep(CrmPluginStep step)
         {
             if (step == null)
             {
@@ -123,7 +125,7 @@ namespace PluginRegistrator.Helpers
             return step.Id;
         }
 
-        public static Guid RegisterImage(CrmPluginImage image)
+        public Guid RegisterImage(CrmPluginImage image)
         {
             if (image == null)
             {
@@ -137,7 +139,7 @@ namespace PluginRegistrator.Helpers
             return OrgService.Create(sdkImage);
         }
 
-        public static void UpdateServiceEndpoint(CrmServiceEndpoint serviceEndpoint)
+        public void UpdateServiceEndpoint(CrmServiceEndpoint serviceEndpoint)
         {
             if (serviceEndpoint == null)
             {
@@ -151,7 +153,7 @@ namespace PluginRegistrator.Helpers
             OrgService.Update(sep);
         }
 
-        public static void UpdatePlugin(CrmPlugin plugin)
+        public void UpdatePlugin(CrmPlugin plugin)
         {
             if (plugin == null)
             {
@@ -165,7 +167,7 @@ namespace PluginRegistrator.Helpers
             OrgService.Update(pt);
         }
 
-        public static void UpdateStep(CrmPluginStep step)
+        public void UpdateStep(CrmPluginStep step)
         {
             if (step == null)
             {
@@ -181,7 +183,7 @@ namespace PluginRegistrator.Helpers
             UpdateStepStatus(step.Id, step.Enabled);
         }
 
-        public static void UpdateStepStatus(Guid stepId, bool enabled)
+        public void UpdateStepStatus(Guid stepId, bool enabled)
         {
             if (stepId == Guid.Empty)
             {
@@ -201,7 +203,7 @@ namespace PluginRegistrator.Helpers
             OrgService.Execute(request);
         }
 
-        public static void UpdateImage(CrmPluginImage image)
+        public void UpdateImage(CrmPluginImage image)
         {
             if (image == null)
             {
@@ -215,7 +217,7 @@ namespace PluginRegistrator.Helpers
             OrgService.Update(sdkImage);
         }
 
-        public static void Unregister(params ICrmEntity[] crmEntity)
+        public void Unregister(params ICrmEntity[] crmEntity)
         {
             if (crmEntity?.Length == 0)
             {
@@ -300,7 +302,7 @@ namespace PluginRegistrator.Helpers
             }
         }
 
-        public static IEnumerable<SdkMessage> RetrieveMessages()
+        public IEnumerable<SdkMessage> RetrieveMessages()
         {
             var query =
                 new QueryExpression(SdkMessage.EntityLogicalName)
@@ -313,7 +315,7 @@ namespace PluginRegistrator.Helpers
             return OrgService.RetrieveMultiple(query).Entities.Cast<SdkMessage>();
         }
 
-        public static IEnumerable<SdkMessageFilter> RetrieveMessageFilters(params Guid[] messageIds)
+        public IEnumerable<SdkMessageFilter> RetrieveMessageFilters(params Guid[] messageIds)
         {
             var query =
                 new QueryExpression(SdkMessageFilter.EntityLogicalName)
@@ -327,27 +329,27 @@ namespace PluginRegistrator.Helpers
             return OrgService.RetrieveMultiple(query).Entities.Cast<SdkMessageFilter>();
         }
 
-        private static IEnumerable<Guid> RetrieveStepIdsForServiceEndpoint(ICollection<Guid> serviceEndpointIds)
+        private IEnumerable<Guid> RetrieveStepIdsForServiceEndpoint(ICollection<Guid> serviceEndpointIds)
         {
             return RetrieveReferenceAttributeIds(SdkMessageProcessingStep.EntityLogicalName, "sdkmessageprocessingstepid", "eventhandler", serviceEndpointIds);
         }
 
-        private static IEnumerable<Guid> RetrieveStepIdsForPlugins(ICollection<Guid> pluginIds)
+        private IEnumerable<Guid> RetrieveStepIdsForPlugins(ICollection<Guid> pluginIds)
         {
             return RetrieveReferenceAttributeIds(SdkMessageProcessingStep.EntityLogicalName, "sdkmessageprocessingstepid", "plugintypeid", pluginIds);
         }
 
-        private static IEnumerable<Guid> RetrieveImageIdsForStepId(ICollection<Guid> stepIds)
+        private IEnumerable<Guid> RetrieveImageIdsForStepId(ICollection<Guid> stepIds)
         {
             return RetrieveReferenceAttributeIds(SdkMessageProcessingStepImage.EntityLogicalName, "sdkmessageprocessingstepimageid", "sdkmessageprocessingstepid", stepIds);
         }
 
-        private static IEnumerable<Guid> RetrievePluginIdsForAssembly(ICollection<Guid> assemblyIds)
+        private IEnumerable<Guid> RetrievePluginIdsForAssembly(ICollection<Guid> assemblyIds)
         {
             return RetrieveReferenceAttributeIds(PluginType.EntityLogicalName, "plugintypeid", "pluginassemblyid", assemblyIds);
         }
 
-        private static IEnumerable<Guid> RetrieveReferenceAttributeIds(string entityName, string retrieveAttribute, string filterAttribute, ICollection<Guid> filterIds)
+        private IEnumerable<Guid> RetrieveReferenceAttributeIds(string entityName, string retrieveAttribute, string filterAttribute, ICollection<Guid> filterIds)
         {
             if (string.IsNullOrEmpty(entityName))
             {
@@ -387,8 +389,8 @@ namespace PluginRegistrator.Helpers
             {
                 switch (value)
                 {
-                    case Guid guid:
-                        result.Add(guid);
+                    case Guid id:
+                        result.Add(id);
                         break;
                     case EntityReference entityRef:
                         result.Add(entityRef.Id);
