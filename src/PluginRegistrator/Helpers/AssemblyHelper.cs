@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
+using AutoMapper;
 using CrmSdk;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
@@ -20,12 +21,17 @@ namespace PluginRegistrator.Helpers
 
         private IEnumerable<SdkMessageFilter> messageFilters;
 
-        internal AssemblyHelper(IOrganizationService orgService, RegistrationHelper registrationHelper) =>
-            (OrgService, RegistrationHelper) = (orgService, registrationHelper);
+        internal AssemblyHelper(
+            IOrganizationService orgService,
+            RegistrationHelper registrationHelper,
+            IMapper mapper) =>
+                (OrgService, RegistrationHelper, Mapper) = (orgService, registrationHelper, mapper);
 
         private IOrganizationService OrgService { get; }
 
         private RegistrationHelper RegistrationHelper { get; }
+
+        private IMapper Mapper { get; }
 
         private IEnumerable<SdkMessage> Messages => messages ?? (messages = RegistrationHelper.RetrieveMessages());
 
@@ -52,8 +58,8 @@ namespace PluginRegistrator.Helpers
 
             var unsecureConfigItems = XDocument.Load(pathToUnsecureConfigFile).Root.Elements("item").ToList();
             var assembly = LoadAssembly(path);
-            var pluginAssembly = assembly.ToCrmPluginAssembly();
-            pluginAssembly.FillPluginsFromAssembly(assembly, unsecureConfigItems, Messages, MessageFilters);
+            var pluginAssembly = Mapper.Map<CrmPluginAssembly>(assembly);
+            pluginAssembly.SetupAssemblyPlugins(assembly, unsecureConfigItems, Messages, MessageFilters);
 
             return pluginAssembly;
         }
@@ -73,7 +79,7 @@ namespace PluginRegistrator.Helpers
             Contract.EndContractBlock();
 
             var assembly = LoadAssembly(path);
-            var pluginAssembly = assembly.ToCrmPluginAssembly();
+            var pluginAssembly = Mapper.Map<CrmPluginAssembly>(assembly);
             var pluginType = assembly.GetExportedTypes().FirstOrDefault(t => !t.IsAbstract && t.IsClass && t.Name.EndsWith("Plugin"));
             Version sdkVersion = null;
             if (pluginType != null)
@@ -82,7 +88,7 @@ namespace PluginRegistrator.Helpers
                 sdkVersion = xrmPlugin.Assembly.GetName().Version;
             }
 
-            pluginAssembly.FillPluginsFromAssembly(sdkVersion, config, Messages, MessageFilters);
+            pluginAssembly.SetupAssemblyPlugins(sdkVersion, config, Messages, MessageFilters);
 
             return pluginAssembly;
         }

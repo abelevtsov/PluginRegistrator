@@ -16,7 +16,8 @@ namespace PluginRegistrator.Entities
             string relatedAttribute,
             string entityAlias,
             CrmPluginImageType imageType,
-            string messagePropertyName)
+            string messagePropertyName,
+            string name)
         {
             AssemblyId = assemblyId;
             PluginId = pluginId;
@@ -26,6 +27,7 @@ namespace PluginRegistrator.Entities
             EntityAlias = entityAlias;
             ImageType = imageType;
             MessagePropertyName = messagePropertyName;
+            Name = name;
         }
 
         public CrmPluginImage(Guid assemblyId, Guid pluginId, SdkMessageProcessingStepImage image)

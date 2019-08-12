@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Activities;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
@@ -17,37 +15,7 @@ namespace PluginRegistrator.Extensions
 {
     public static class CrmPluginAssemblyExtensions
     {
-        public static CrmPluginAssembly ToCrmPluginAssembly(this Assembly assembly)
-        {
-            if (assembly == null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
-
-            Contract.EndContractBlock();
-
-            var pluginAssembly =
-                new CrmPluginAssembly
-                    {
-                        SourceType = CrmAssemblySourceType.Database
-                    };
-
-            var name = assembly.GetName();
-            var cultureLabel = name.CultureInfo.LCID == CultureInfo.InvariantCulture.LCID ? "neutral" : name.CultureInfo.Name;
-
-            pluginAssembly.Name = name.Name;
-            pluginAssembly.Version = name.Version.ToString();
-            pluginAssembly.Culture = cultureLabel;
-
-            var tokenBytes = name.GetPublicKeyToken();
-            pluginAssembly.PublicKeyToken = tokenBytes == null || tokenBytes.Length == 0
-                ? null
-                : string.Join(string.Empty, tokenBytes.Select(b => b.ToString("X2")));
-
-            return pluginAssembly;
-        }
-
-        public static void FillPluginsFromAssembly(
+        public static void SetupAssemblyPlugins(
             this CrmPluginAssembly pluginAssembly,
             Assembly assembly,
             IReadOnlyCollection<XElement> unsecureConfigItems,
@@ -128,7 +96,6 @@ namespace PluginRegistrator.Extensions
                     var filteringAttributes = stepMethod.GetCustomAttribute<FilteringAttributesAttribute>();
                     foreach (var pluginStepAttr in pluginStepAttrs)
                     {
-                        // ToDo: use AutoMapper
                         var step =
                             new CrmPluginStep
                                 {
@@ -178,13 +145,11 @@ namespace PluginRegistrator.Extensions
                             switch (p.Name)
                             {
                                 case "preEntityImage":
-                                    image = new CrmPluginImage(step.AssemblyId, step.PluginId, step.Id, imageParameters.ToString(), null, "preimage", CrmPluginImageType.PreImage, CrmMessage.Instance[pluginStepAttr.PluginMessageName]);
-                                    image.Name = "preimage";
+                                    image = CreateImage(step, imageParameters.ToString(), pluginStepAttr.PluginMessageName, CrmPluginImageType.PreImage);
                                     step.AddImage(image);
                                     break;
                                 case "postEntityImage":
-                                    image = new CrmPluginImage(step.AssemblyId, step.PluginId, step.Id, imageParameters.ToString(), null, "postimage", CrmPluginImageType.PostImage, CrmMessage.Instance[pluginStepAttr.PluginMessageName]);
-                                    image.Name = "postimage";
+                                    image = CreateImage(step, imageParameters.ToString(), pluginStepAttr.PluginMessageName, CrmPluginImageType.PostImage);
                                     step.AddImage(image);
                                     break;
                             }
@@ -198,7 +163,7 @@ namespace PluginRegistrator.Extensions
             }
         }
 
-        public static void FillPluginsFromAssembly(
+        public static void SetupAssemblyPlugins(
             this CrmPluginAssembly pluginAssembly,
             Version sdkVersion,
             XDocument config,
@@ -255,9 +220,8 @@ namespace PluginRegistrator.Extensions
                 var pluginName = splitted[0].Replace("Plugin", string.Empty);
                 plugin.Name = $" {splitted[1]}: {pluginName}";
 
-                foreach (var pluginStepAttr in pluginElement.Element(ns + "Steps").Elements(ns + "Step"))
+                foreach (var pluginStepEl in pluginElement.Element(ns + "Steps").Elements(ns + "Step"))
                 {
-                    // ToDo: use AutoMapper
                     var step =
                         new CrmPluginStep
                             {
@@ -266,76 +230,42 @@ namespace PluginRegistrator.Extensions
                                 DeleteAsyncOperationIfSuccessful = false, // ToDo: implement for ugly config
                                 Deployment = CrmPluginStepDeployment.ServerOnly,
                                 Enabled = true, // ToDo: implement for ugly config
-                                Name = pluginStepAttr.Attribute("Name").Value,
-                                Rank = int.Parse(pluginStepAttr.Attribute("Rank").Value),
-                                Stage = pluginStepAttr.Attribute("Stage").Value == "PreInsideTransaction" ? CrmPluginStepStage.PreOperation : CrmPluginStepStage.PostOperation, // ToDo: CrmPluginStepStage.PreValidation
-                                Mode = pluginStepAttr.Attribute("Mode").Value == PluginExecutionMode.Asynchronous.ToString().ToLowerInvariant() ? CrmPluginStepMode.Asynchronous : CrmPluginStepMode.Synchronous,
-                                MessageId = messages.First(m => m.Name == pluginStepAttr.Attribute("MessageName").Value).Id,
-                                Description = pluginStepAttr.Attribute("Description").Value
+                                Name = pluginStepEl.Attribute("Name").Value,
+                                Rank = int.Parse(pluginStepEl.Attribute("Rank").Value),
+                                Stage = pluginStepEl.Attribute("Stage").Value == "PreInsideTransaction" ? CrmPluginStepStage.PreOperation : CrmPluginStepStage.PostOperation, // ToDo: CrmPluginStepStage.PreValidation
+                                Mode = pluginStepEl.Attribute("Mode").Value == PluginExecutionMode.Asynchronous.ToString().ToLowerInvariant() ? CrmPluginStepMode.Asynchronous : CrmPluginStepMode.Synchronous,
+                                MessageId = messages.First(m => m.Name == pluginStepEl.Attribute("MessageName").Value).Id,
+                                Description = pluginStepEl.Attribute("Description").Value
                             };
                     var filter =
                         messageFilters.FirstOrDefault(
                             f =>
                                 f.SdkMessageId.Id == step.MessageId &&
-                                f.PrimaryEntityLogicalName == pluginStepAttr.Attribute("PrimaryEntityName").Value.ToLowerInvariant());
+                                f.PrimaryEntityLogicalName == pluginStepEl.Attribute("PrimaryEntityName").Value.ToLowerInvariant());
                     if (filter == null)
                     {
-                        throw new Exception($"{pluginStepAttr.Attribute("PrimaryEntityName").Value} entity doesn't registered yet");
+                        throw new Exception($"{pluginStepEl.Attribute("PrimaryEntityName").Value} entity doesn't registered yet");
                     }
 
                     step.MessageEntityId = filter.Id;
-                    var attr = pluginStepAttr.Attribute("FilteringAttributes");
+                    var attr = pluginStepEl.Attribute("FilteringAttributes");
                     if (!string.IsNullOrEmpty(attr?.Value))
                     {
                         step.FilteringAttributes = attr.Value;
                     }
 
-                    var unsecureItem = pluginStepAttr.Attribute("CustomConfiguration").Value;
+                    var unsecureItem = pluginStepEl.Attribute("CustomConfiguration").Value;
                     if (!string.IsNullOrEmpty(unsecureItem))
                     {
                         step.UnsecureConfiguration = unsecureItem;
                     }
 
-                    foreach (var p in pluginStepAttr.Element(ns + "Images").Elements(ns + "Image"))
+                    foreach (var imageEl in pluginStepEl.Element(ns + "Images").Elements(ns + "Image"))
                     {
-                        CrmPluginImage image;
-                        var imageAttr = p.Attribute("Attributes");
-                        var imageType = p.Attribute("ImageType").Value;
-
-                        // note: ignore EntityAlias for convenience
-                        switch (imageType)
+                        var image = CreateImage(step, imageEl, pluginStepEl);
+                        if (image != null)
                         {
-                            case "PreImage":
-                                image =
-                                    new CrmPluginImage(
-                                        step.AssemblyId,
-                                        step.PluginId,
-                                        step.Id,
-                                        !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
-                                        null,
-                                        "preimage",
-                                        CrmPluginImageType.PreImage,
-                                        CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
-                                image.Name = "preimage";
-                                step.AddImage(image);
-                                break;
-                            case "PostImage":
-                                image =
-                                    new CrmPluginImage(
-                                        step.AssemblyId,
-                                        step.PluginId,
-                                        step.Id,
-                                        !string.IsNullOrEmpty(imageAttr?.Value) ? imageAttr.Value : null,
-                                        null,
-                                        "postimage",
-                                        CrmPluginImageType.PostImage,
-                                        CrmMessage.Instance[pluginStepAttr.Attribute("MessageName").Value]);
-                                image.Name = "postimage";
-                                step.AddImage(image);
-                                break;
-                            case "Both":
-                                // ToDo: process both
-                                break;
+                            step.AddImage(image);
                         }
                     }
 
@@ -344,6 +274,49 @@ namespace PluginRegistrator.Extensions
 
                 pluginAssembly.AddPlugin(plugin);
             }
+        }
+
+        private static CrmPluginImage CreateImage(CrmPluginStep step, XElement imageEl, XElement pluginStepEl)
+        {
+            var imageAttributes = imageEl.Attribute("Attributes");
+            var imageType = imageEl.Attribute("ImageType").Value;
+
+            // note: ignore EntityAlias for convenience
+            switch (imageType)
+            {
+                case "PreImage":
+                    return CreateImage(
+                        step,
+                        string.IsNullOrEmpty(imageAttributes?.Value) ? null : imageAttributes.Value,
+                        pluginStepEl.Attribute("MessageName").Value,
+                        CrmPluginImageType.PreImage);
+                case "PostImage":
+                    return CreateImage(
+                        step,
+                        string.IsNullOrEmpty(imageAttributes?.Value) ? null : imageAttributes.Value,
+                        pluginStepEl.Attribute("MessageName").Value,
+                        CrmPluginImageType.PostImage);
+                case "Both":
+                    // ToDo: process "Both"
+                    return null;
+                default:
+                    return null;
+            }
+        }
+
+        private static CrmPluginImage CreateImage(CrmPluginStep step, string imageAttributes, string pluginMessageName, CrmPluginImageType pluginImageType)
+        {
+            return
+                new CrmPluginImage(
+                    step.AssemblyId,
+                    step.PluginId,
+                    step.Id,
+                    imageAttributes,
+                    null,
+                    pluginImageType == CrmPluginImageType.PreImage ? "preimage" : "postimage",
+                    pluginImageType,
+                    CrmMessage.Instance[pluginMessageName],
+                    pluginImageType == CrmPluginImageType.PreImage ? "preimage" : "postimage");
         }
     }
 }

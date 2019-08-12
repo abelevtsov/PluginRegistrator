@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
+using AutoMapper;
 using CrmSdk;
 using Microsoft.Xrm.Sdk;
 using PluginRegistrator.Entities;
 using PluginRegistrator.Helpers;
+using PluginRegistrator.Profiles;
 
 namespace PluginRegistrator
 {
@@ -14,13 +16,22 @@ namespace PluginRegistrator
     {
         public PluginProcessor(IOrganizationService orgService)
         {
+            Mapper =
+                new MapperConfiguration(
+                    cfg =>
+                    {
+                        cfg.AddProfile<CrmPluginAssemblyProfile>();
+                    }).CreateMapper();
+
             RegistrationHelper = new RegistrationHelper(orgService);
-            AssemblyHelper = new AssemblyHelper(orgService, RegistrationHelper);
+            AssemblyHelper = new AssemblyHelper(orgService, RegistrationHelper, Mapper);
         }
 
         private AssemblyHelper AssemblyHelper { get; }
 
         private RegistrationHelper RegistrationHelper { get; }
+
+        private IMapper Mapper { get; }
 
         public void Process(string pluginsPath, string mergedPluginAssemblyPath, string unsecureConfigFilePath)
         {
